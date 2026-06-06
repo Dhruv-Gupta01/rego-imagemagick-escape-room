@@ -1,7 +1,7 @@
 [
   {
     "id": "move_r2_no_brass_key",
-    "description": "move needs brass",
+    "description": "move_r2_no_brass_key",
     "input": {
       "current_room": "R1",
       "inventory": [],
@@ -23,7 +23,7 @@
   },
   {
     "id": "move_r4_no_hammer",
-    "description": "move needs hammer",
+    "description": "move_r4_no_hammer",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -49,7 +49,7 @@
   },
   {
     "id": "move_r6_from_r2_no_glyph_key",
-    "description": "no glyph_key",
+    "description": "move_r6_from_r2_no_glyph_key",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -74,7 +74,7 @@
   },
   {
     "id": "move_r6_wrong_glyph_id_index0",
-    "description": "wrong id",
+    "description": "move_r6_wrong_glyph_id_index0",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -100,7 +100,7 @@
   },
   {
     "id": "move_r6_hardcoded_14_fails_index2",
-    "description": "hc14 idx2",
+    "description": "move_r6_hardcoded_14_fails_index2",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -126,7 +126,7 @@
   },
   {
     "id": "move_r6_hardcoded_14_fails_index3",
-    "description": "hc14 idx3",
+    "description": "move_r6_hardcoded_14_fails_index3",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -152,7 +152,7 @@
   },
   {
     "id": "exit_wrong_glyph_id",
-    "description": "wrong id idx1",
+    "description": "exit_wrong_glyph_id",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -185,7 +185,7 @@
   },
   {
     "id": "exit_no_lit_torch",
-    "description": "no lit_torch",
+    "description": "exit_no_lit_torch",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -217,7 +217,7 @@
   },
   {
     "id": "exit_no_glyph_key",
-    "description": "no glyph_key",
+    "description": "exit_no_glyph_key",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -249,7 +249,7 @@
   },
   {
     "id": "exit_wrong_room",
-    "description": "not R5",
+    "description": "exit_wrong_room",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -277,7 +277,7 @@
   },
   {
     "id": "exit_missing_one_color_key",
-    "description": "missing blue",
+    "description": "exit_missing_one_color_key",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -309,7 +309,7 @@
   },
   {
     "id": "exit_missing_all_color_keys",
-    "description": "no colours",
+    "description": "exit_missing_all_color_keys",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -339,7 +339,7 @@
   },
   {
     "id": "exit_cursed_normal_blocked",
-    "description": "curse blocks",
+    "description": "exit_cursed_normal_blocked",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -373,7 +373,7 @@
   },
   {
     "id": "exit_sealed_no_master_seal",
-    "description": "sealed blocks",
+    "description": "exit_sealed_no_master_seal",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -405,8 +405,42 @@
     "expected": false
   },
   {
+    "id": "exit_eclipse_ward_blocked",
+    "description": "exit_eclipse_ward_blocked",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "move_cursed_no_eclipse",
-    "description": "curse blocks move",
+    "description": "move_cursed_no_eclipse",
     "input": {
       "current_room": "R0",
       "inventory": [
@@ -429,7 +463,7 @@
   },
   {
     "id": "move_sealed_no_master_seal",
-    "description": "sealed blocks move",
+    "description": "move_sealed_no_master_seal",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -449,8 +483,56 @@
     "expected": false
   },
   {
+    "id": "move_sealed_door_item_no_seal",
+    "description": "move_sealed_door_item_no_seal",
+    "input": {
+      "current_room": "R3",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R3"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R4"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "move_eclipse_ward_blocked",
+    "description": "move_eclipse_ward_blocked",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "teleport_cursed_no_eclipse",
-    "description": "curse blocks tp",
+    "description": "teleport_cursed_no_eclipse",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -477,7 +559,7 @@
   },
   {
     "id": "teleport_sealed_no_master_seal",
-    "description": "sealed blocks tp",
+    "description": "teleport_sealed_no_master_seal",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -502,8 +584,61 @@
     "expected": false
   },
   {
+    "id": "teleport_eclipse_ward_blocked",
+    "description": "teleport_eclipse_ward_blocked",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R4"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "teleport_self_excluded",
+    "description": "teleport_self_excluded",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R6"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "teleport_not_in_r6",
-    "description": "only from R6",
+    "description": "teleport_not_in_r6",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -530,7 +665,7 @@
   },
   {
     "id": "teleport_room_not_unlocked",
-    "description": "not unlocked",
+    "description": "teleport_room_not_unlocked",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -556,7 +691,7 @@
   },
   {
     "id": "teleport_unreachable_isolated",
-    "description": "unreachable R2",
+    "description": "teleport_unreachable_isolated",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -582,7 +717,7 @@
   },
   {
     "id": "decode_glyph_not_in_r2",
-    "description": "decode not R2",
+    "description": "decode_glyph_not_in_r2",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -602,7 +737,7 @@
   },
   {
     "id": "take_item_not_in_room",
-    "description": "take absent",
+    "description": "take_item_not_in_room",
     "input": {
       "current_room": "R1",
       "inventory": [],
@@ -626,7 +761,7 @@
   },
   {
     "id": "combine_invalid_recipe",
-    "description": "no recipe",
+    "description": "combine_invalid_recipe",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -651,7 +786,7 @@
   },
   {
     "id": "move_r7_denied",
-    "description": "move R7 denied",
+    "description": "move_r7_denied",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -686,7 +821,7 @@
   },
   {
     "id": "use_item_not_in_inventory",
-    "description": "use not held",
+    "description": "use_item_not_in_inventory",
     "input": {
       "current_room": "R0",
       "inventory": [],

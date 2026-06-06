@@ -49,6 +49,7 @@ Human-readable copy of the complete rulebook.
 | `glyph_key`   | `decode_glyph` in R2  | Required for R2–R6 and Exit |
 | `cursed_idol` | R6 (optional — trap)  | Blocks move/teleport/exit in `normal` phase |
 | `master_seal` | R6 (pick up)          | Lifts the `sealed`-phase movement block |
+| `eclipse_ward` | R6 (pick up — trap)  | Re-imposes the movement block during `eclipse` |
 | `key_red`     | R1 (pick up)          | Colour key — all three needed for Exit/win |
 | `key_green`   | R3 (pick up)          | Colour key — all three needed for Exit/win |
 | `key_blue`    | R4 (pick up)          | Colour key — all three needed for Exit/win |
@@ -70,11 +71,11 @@ Applies to `move`, `teleport`, and `exit` only (never to look/take/combine/use/d
 `epoch_phase` ∈ {`normal`, `eclipse`, `sealed`}:
 
 - **`normal`** → blocked iff `cursed_idol` is held.
-- **`eclipse`** → never blocked (the curse is lifted even while holding the idol).
+- **`eclipse`** → curse lifted, so normally not blocked; but blocked iff `eclipse_ward` is held.
 - **`sealed`** → blocked regardless of the idol, UNLESS `master_seal` is held.
 
-Movement is blocked exactly when `(normal AND cursed_idol)` OR `(sealed AND NOT master_seal)`.
-See instruction §7.
+Movement is blocked exactly when `(normal AND cursed_idol)` OR `(eclipse AND eclipse_ward)`
+OR `(sealed AND NOT master_seal)`. See instruction §7.
 
 ---
 

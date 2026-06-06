@@ -89,6 +89,7 @@ Eight rooms. All door edges are **undirected** (traversal works both ways).
 | `glyph_key` | `decode_glyph` in R2 | Required for R2–R6 door and Exit |
 | `cursed_idol` | Pick up in R6 (optional) | **Trap item** — see §7 |
 | `master_seal` | Pick up in R6 | Lifts the `sealed`-phase movement block (see §7) |
+| `eclipse_ward` | Pick up in R6 | **Trap item** — re-imposes the movement block during the `eclipse` phase (see §7) |
 | `key_red` | Pick up in R1 | One of three colour keys required to Exit and win (§9) |
 | `key_green` | Pick up in R3 | One of three colour keys required to Exit and win (§9) |
 | `key_blue` | Pick up in R4 | One of three colour keys required to Exit and win (§9) |
@@ -184,8 +185,10 @@ are **never** blocked by any of this.) `epoch_phase` is one of `"normal"`,
 `"eclipse"`, or `"sealed"`:
 
 - **`normal`** — movement is blocked **iff** `cursed_idol` is in inventory.
-- **`eclipse`** — movement is **never** blocked; the eclipse lifts the
-  `cursed_idol` curse entirely (even while you still hold the idol).
+- **`eclipse`** — the eclipse lifts the `cursed_idol` curse, so movement is
+  normally **not** blocked; **however**, holding `eclipse_ward` re-imposes the
+  block during eclipse. So in `eclipse`, movement is blocked **iff** `eclipse_ward`
+  is in inventory (the idol itself is irrelevant in this phase).
 - **`sealed`** — movement is blocked **regardless of the idol**, **unless**
   `master_seal` is in inventory, which lifts the sealed block.
 
@@ -194,12 +197,13 @@ Equivalently, **movement is blocked exactly when**:
 ```
 (epoch_phase == "normal" AND cursed_idol in inventory)
   OR
+(epoch_phase == "eclipse" AND eclipse_ward in inventory)
+  OR
 (epoch_phase == "sealed" AND master_seal NOT in inventory)
 ```
 
 A blocked `move` / `teleport` / `exit` is denied no matter how well its other
-requirements (doors, keys, reachability) are satisfied. In `"eclipse"`, and in
-`"sealed"` while holding `master_seal`, the idol does **not** block anything.
+requirements (doors, keys, reachability) are satisfied.
 
 ---
 
@@ -221,6 +225,11 @@ Condition 4 requires a transitive-closure computation over the unlocked,
 passable sub-graph — not just a membership check. A room can be in
 `unlocked_rooms` but unreachable if the path to it is blocked (e.g. the door
 requires a key the player does not currently hold).
+
+**Implementation note:** OPA does **not** permit general recursive user-defined
+rules. Compute the transitive closure with the built-in
+`graph.reachable(graph, initial_set)` function (or an equivalent non-recursive
+construction); a hand-rolled recursive rule will fail `opa check` or time out.
 
 ---
 

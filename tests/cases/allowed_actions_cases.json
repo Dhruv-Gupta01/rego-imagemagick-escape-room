@@ -1,7 +1,7 @@
 [
   {
     "id": "start_r0",
-    "description": "R0 start, brass_key available",
+    "description": "R0 start",
     "state": {
       "current_room": "R0",
       "inventory": [],
@@ -55,7 +55,7 @@
   },
   {
     "id": "r0_cursed_normal",
-    "description": "R0 cursed normal \u2014 moves blocked",
+    "description": "R0 cursed normal",
     "state": {
       "current_room": "R0",
       "inventory": [
@@ -81,7 +81,7 @@
   },
   {
     "id": "r0_cursed_eclipse",
-    "description": "R0 cursed eclipse \u2014 move restored",
+    "description": "R0 cursed eclipse (no ward)",
     "state": {
       "current_room": "R0",
       "inventory": [
@@ -110,8 +110,58 @@
     ]
   },
   {
+    "id": "r0_eclipse_ward",
+    "description": "R0 eclipse + ward blocks",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "eclipse_ward",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_eclipse_clean",
+    "description": "R0 eclipse clean",
+    "state": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
     "id": "r0_sealed_empty",
-    "description": "R0 sealed no master_seal \u2014 move blocked",
+    "description": "R0 sealed no seal",
     "state": {
       "current_room": "R0",
       "inventory": [],
@@ -131,7 +181,7 @@
   },
   {
     "id": "r0_sealed_master",
-    "description": "R0 sealed + master_seal \u2014 move restored",
+    "description": "R0 sealed + master_seal",
     "state": {
       "current_room": "R0",
       "inventory": [
@@ -161,7 +211,7 @@
   },
   {
     "id": "r0_cursed_sealed",
-    "description": "R0 cursed + sealed, no seal \u2014 blocked",
+    "description": "R0 cursed + sealed",
     "state": {
       "current_room": "R0",
       "inventory": [
@@ -187,7 +237,7 @@
   },
   {
     "id": "r0_cursed_master_sealed",
-    "description": "R0 cursed + sealed + master_seal \u2014 restored",
+    "description": "R0 cursed+sealed+master",
     "state": {
       "current_room": "R0",
       "inventory": [
@@ -222,7 +272,7 @@
   },
   {
     "id": "r2_before_decode",
-    "description": "R2 brass_key, pre-decode",
+    "description": "R2 pre-decode",
     "state": {
       "current_room": "R2",
       "inventory": [
@@ -257,7 +307,7 @@
   },
   {
     "id": "r2_after_decode_idx0",
-    "description": "R2 brass+glyph id14 idx0",
+    "description": "R2 post-decode idx0",
     "state": {
       "current_room": "R2",
       "inventory": [
@@ -301,7 +351,7 @@
   },
   {
     "id": "r2_after_decode_idx2",
-    "description": "R2 brass+glyph id8 idx2",
+    "description": "R2 post-decode idx2",
     "state": {
       "current_room": "R2",
       "inventory": [
@@ -345,7 +395,7 @@
   },
   {
     "id": "r1_take_stick_keyred",
-    "description": "R1 brass, stick+key_red available",
+    "description": "R1 takes",
     "state": {
       "current_room": "R1",
       "inventory": [
@@ -395,7 +445,7 @@
   },
   {
     "id": "r5_full_kit_normal",
-    "description": "R5 full kit normal \u2014 exit available",
+    "description": "R5 kit normal",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -459,7 +509,7 @@
   },
   {
     "id": "r5_full_kit_idx3",
-    "description": "R5 full kit id4 idx3 \u2014 exit available",
+    "description": "R5 kit idx3",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -523,7 +573,7 @@
   },
   {
     "id": "r5_missing_blue_normal",
-    "description": "R5 missing key_blue \u2014 no exit",
+    "description": "R5 missing blue",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -579,7 +629,7 @@
   },
   {
     "id": "r5_full_kit_cursed_normal",
-    "description": "R5 full kit + cursed normal \u2014 blocked",
+    "description": "R5 kit cursed",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -641,7 +691,7 @@
   },
   {
     "id": "r5_full_kit_sealed_noseal",
-    "description": "R5 full kit sealed no master_seal \u2014 blocked",
+    "description": "R5 kit sealed",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -698,7 +748,7 @@
   },
   {
     "id": "r5_full_kit_sealed_master",
-    "description": "R5 full kit sealed + master_seal \u2014 exit restored",
+    "description": "R5 kit sealed+master",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -767,7 +817,7 @@
   },
   {
     "id": "r5_full_kit_eclipse_idol",
-    "description": "R5 full kit + idol eclipse \u2014 exit allowed",
+    "description": "R5 kit eclipse idol",
     "state": {
       "current_room": "R5",
       "inventory": [
@@ -835,8 +885,70 @@
     ]
   },
   {
+    "id": "r5_full_kit_eclipse_ward",
+    "description": "R5 kit eclipse + ward blocks",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "eclipse_ward",
+        "type": "use"
+      },
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
     "id": "r6_partial_hammer",
-    "description": "R6 hammer, partial unlock \u2014 teleport set",
+    "description": "R6 partial teleport",
     "state": {
       "current_room": "R6",
       "inventory": [
@@ -885,7 +997,7 @@
   },
   {
     "id": "r6_isolated",
-    "description": "R6 isolated \u2014 no teleport",
+    "description": "R6 isolated",
     "state": {
       "current_room": "R6",
       "inventory": [
@@ -922,7 +1034,7 @@
   },
   {
     "id": "r6_cursed_normal",
-    "description": "R6 cursed normal \u2014 move/teleport blocked",
+    "description": "R6 cursed",
     "state": {
       "current_room": "R6",
       "inventory": [
@@ -956,7 +1068,7 @@
   },
   {
     "id": "r6_sealed_master",
-    "description": "R6 sealed + master_seal \u2014 restored",
+    "description": "R6 sealed+master",
     "state": {
       "current_room": "R6",
       "inventory": [
@@ -1001,6 +1113,130 @@
       },
       {
         "room": "R5",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_eclipse_ward",
+    "description": "R6 eclipse+ward blocks",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "eclipse_ward",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_eclipse_clean",
+    "description": "R6 eclipse clean teleport",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "teleport"
+      },
+      {
+        "room": "R3",
+        "type": "teleport"
+      },
+      {
+        "room": "R4",
+        "type": "move"
+      },
+      {
+        "room": "R4",
+        "type": "teleport"
+      },
+      {
+        "room": "R5",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r3_sealed_master_hammer",
+    "description": "R3 sealed+master moves",
+    "state": {
+      "current_room": "R3",
+      "inventory": [
+        "hammer",
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "master_seal",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "room": "R4",
         "type": "move"
       },
       {

@@ -53,6 +53,11 @@
       "obtainable_in": "R6",
       "craftable": false
     },
+    "eclipse_ward": {
+      "description": "A trap charm. During the 'eclipse' epoch phase (which normally lifts the curse), holding eclipse_ward re-imposes the movement block.",
+      "obtainable_in": "R6",
+      "craftable": false
+    },
     "key_red": {
       "description": "Red colour key. One of three colour keys; ALL three (key_red, key_green, key_blue) are required to use the exit and to win.",
       "obtainable_in": "R1",

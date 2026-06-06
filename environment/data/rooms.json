@@ -62,7 +62,7 @@
     "R3": ["rock", "key_green"],
     "R4": ["torch", "oil", "key_blue"],
     "R5": [],
-    "R6": ["cursed_idol", "master_seal"],
+    "R6": ["cursed_idol", "master_seal", "eclipse_ward"],
     "R7": []
   }
 }

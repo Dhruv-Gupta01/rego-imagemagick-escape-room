@@ -49,6 +49,11 @@ movement_blocked if {
 }
 
 movement_blocked if {
+	input.epoch_phase == "eclipse"
+	"eclipse_ward" in input.inventory
+}
+
+movement_blocked if {
 	input.epoch_phase == "sealed"
 	not has_master_seal
 }
