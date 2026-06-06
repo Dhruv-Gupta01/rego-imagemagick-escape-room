@@ -37,11 +37,44 @@ computed_glyph_key_id := (glyph_widths[input.glyph_index] / 8) % 16
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
-# cursed_blocked is true when the idol curse is in effect.
-# Holding cursed_idol blocks all door-traversal and exit UNLESS eclipse is active.
-cursed_blocked if {
+# ─── Movement-blocking precedence lattice ─────────────────────────────────────
+# Blocking applies to move / teleport / exit only (look/take/combine/use/
+# decode_glyph are never blocked). The epoch_phase + master_seal form a lattice:
+#   normal phase  : blocked iff cursed_idol is held
+#   eclipse phase : never blocked (the idol curse is lifted)
+#   sealed phase  : blocked, UNLESS master_seal is held (master_seal overrides)
+movement_blocked if {
+	input.epoch_phase == "normal"
 	"cursed_idol" in input.inventory
-	input.epoch_phase != "eclipse"
+}
+
+movement_blocked if {
+	input.epoch_phase == "sealed"
+	not has_master_seal
+}
+
+has_master_seal if {
+	"master_seal" in input.inventory
+}
+
+# ─── Colour-lock universal requirement ────────────────────────────────────────
+# The Exit demands EVERY colour lock be satisfied: for every colour in
+# required_colors, key_<colour> must be in inventory (universal => "no colour
+# key is missing").
+required_colors := {"red", "green", "blue"}
+
+has_color_key(c) if {
+	key := sprintf("key_%s", [c])
+	key in input.inventory
+}
+
+some_color_key_missing if {
+	some c in required_colors
+	not has_color_key(c)
+}
+
+all_color_keys if {
+	not some_color_key_missing
 }
 
 # door_passable(from, to): can the player traverse this specific door right now?
@@ -65,6 +98,7 @@ door_passable(from, to) if {
 	door_req[from][to] == "glyph_key"
 	"glyph_key" in input.inventory
 	input.glyph_key_id == computed_glyph_key_id
+	all_color_keys
 }
 
 # ─── Wormhole reachability (Lever 2) ──────────────────────────────────────────
@@ -93,6 +127,7 @@ win if {
 	"lit_torch" in input.inventory
 	"glyph_key" in input.inventory
 	input.glyph_key_id == computed_glyph_key_id
+	all_color_keys
 }
 
 # ─── allow (Lever 3: default deny + curse precedence) ─────────────────────────
@@ -127,7 +162,7 @@ allow if {
 allow if {
 	input.action.type == "move"
 	input.action.room != "R7"
-	not cursed_blocked
+	not movement_blocked
 	door_passable(input.current_room, input.action.room)
 }
 
@@ -141,7 +176,7 @@ allow if {
 allow if {
 	input.action.type == "teleport"
 	input.current_room == "R6"
-	not cursed_blocked
+	not movement_blocked
 	input.action.room in reachable_rooms
 }
 
@@ -151,10 +186,11 @@ allow if {
 allow if {
 	input.action.type == "exit"
 	input.current_room == "R5"
-	not cursed_blocked
+	not movement_blocked
 	"lit_torch" in input.inventory
 	"glyph_key" in input.inventory
 	input.glyph_key_id == computed_glyph_key_id
+	all_color_keys
 }
 
 # ─── allowed_actions set (Lever 1) ────────────────────────────────────────────
@@ -183,7 +219,7 @@ allowed_actions contains {"type": "move", "room": room} if {
 	some room
 	door_req[input.current_room][room] # binds room to each adjacent room key
 	room != "R7"
-	not cursed_blocked
+	not movement_blocked
 	door_passable(input.current_room, room)
 }
 
@@ -193,14 +229,15 @@ allowed_actions contains {"type": "decode_glyph"} if {
 
 allowed_actions contains {"type": "teleport", "room": room} if {
 	input.current_room == "R6"
-	not cursed_blocked
+	not movement_blocked
 	some room in reachable_rooms
 }
 
 allowed_actions contains {"type": "exit"} if {
 	input.current_room == "R5"
-	not cursed_blocked
+	not movement_blocked
 	"lit_torch" in input.inventory
 	"glyph_key" in input.inventory
 	input.glyph_key_id == computed_glyph_key_id
+	all_color_keys
 }
