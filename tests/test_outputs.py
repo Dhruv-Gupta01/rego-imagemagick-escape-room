@@ -45,13 +45,25 @@ def _check_win(state: dict) -> bool:
     return r.json()["win"]
 
 
-def _action_set(state: dict) -> set[frozenset]:
-    """allowed_actions as a set of frozensets, for exact (order-free) comparison."""
-    return {frozenset(a.items()) for a in _allowed_actions(state)}
+def _canon(action: dict) -> str:
+    """Canonical hashable representation of an action object.
+
+    Uses a sorted-key JSON string rather than ``frozenset(action.items())`` so that
+    a malformed policy emitting a non-flat action value fails the comparison
+    cleanly instead of raising ``TypeError: unhashable type: 'dict'``. For the
+    well-formed (flat, string-valued) actions this task uses, the comparison is
+    identical.
+    """
+    return json.dumps(action, sort_keys=True)
 
 
-def _expected_set(actions: list[dict]) -> set[frozenset]:
-    return {frozenset(a.items()) for a in actions}
+def _action_set(state: dict) -> set[str]:
+    """allowed_actions as a set of canonical JSON strings, for exact comparison."""
+    return {_canon(a) for a in _allowed_actions(state)}
+
+
+def _expected_set(actions: list[dict]) -> set[str]:
+    return {_canon(a) for a in actions}
 
 
 # ── Fixture: wait for Flask ────────────────────────────────────────────────────
@@ -103,8 +115,8 @@ def _load_action_cases() -> list:
 def test_allowed_actions_exact(case_id, state, expected_actions):
     got = _action_set(state)
     want = _expected_set(expected_actions)
-    missing = {dict(fs) for fs in want - got}
-    extra = {dict(fs) for fs in got - want}
+    missing = sorted(want - got)
+    extra = sorted(got - want)
     assert got == want, (
         f"[{case_id}] allowed_actions mismatch — "
         f"missing={missing} extra={extra}"
