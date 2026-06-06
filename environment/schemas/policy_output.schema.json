@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolicyOutputShapes",
+  "description": "Expected shapes of each OPA query result the Flask API uses.",
+  "type": "object",
+  "properties": {
+    "data.escape.allow": {
+      "type": "boolean",
+      "description": "true if the action in input is permitted; false otherwise. Default false."
+    },
+    "data.escape.allowed_actions": {
+      "type": "array",
+      "description": "Set of all currently legal actions. Each element is an Action object.",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "type": "string" },
+          "room": { "type": "string" },
+          "item": { "type": "string" },
+          "item1": { "type": "string" },
+          "item2": { "type": "string" }
+        }
+      }
+    },
+    "data.escape.reachable_rooms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Rooms reachable via the wormhole pad from current_room over unlocked edges."
+    },
+    "data.escape.win": {
+      "type": "boolean",
+      "description": "true if the player has reached R7 with the required inventory."
+    }
+  }
+}

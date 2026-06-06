@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scenario",
+  "description": "A scenario injects deterministic, non-real-time context into the game state for each test run.",
+  "type": "object",
+  "required": ["id", "epoch_phase", "glyph_index", "expected_glyph_key_id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique scenario identifier."
+    },
+    "description": {
+      "type": "string"
+    },
+    "epoch_phase": {
+      "type": "string",
+      "enum": ["normal", "eclipse"],
+      "description": "Phase injected into game_state.epoch_phase. 'eclipse' lifts the cursed_idol block."
+    },
+    "glyph_index": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Which glyph PNG to use (0-3). Determines the expected glyph_key_id."
+    },
+    "expected_glyph_key_id": {
+      "type": "integer",
+      "description": "Pre-computed (width // 8) % 16 for this glyph_index. Used by the oracle and tests to verify the policy computes the correct value."
+    }
+  }
+}

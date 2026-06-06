@@ -1,0 +1,52 @@
+{
+  "items": {
+    "brass_key": {
+      "description": "A tarnished brass key. Unlocks the R1-R2 door (Gallery to Archive).",
+      "obtainable_in": "R0",
+      "craftable": false
+    },
+    "stick": {
+      "description": "A sturdy wooden stick. Combine with a rock to craft a hammer.",
+      "obtainable_in": "R1",
+      "craftable": false
+    },
+    "rock": {
+      "description": "A fist-sized rock. Combine with a stick to craft a hammer.",
+      "obtainable_in": "R3",
+      "craftable": false
+    },
+    "hammer": {
+      "description": "A makeshift hammer. Breaks the barrier on the R3-R4 door (Workshop to Conservatory).",
+      "obtainable_in": null,
+      "craftable": true,
+      "recipe": ["stick", "rock"]
+    },
+    "torch": {
+      "description": "An unlit torch. Combine with oil to craft a lit torch.",
+      "obtainable_in": "R4",
+      "craftable": false
+    },
+    "oil": {
+      "description": "A flask of lamp oil. Combine with a torch to craft a lit torch.",
+      "obtainable_in": "R4",
+      "craftable": false
+    },
+    "lit_torch": {
+      "description": "A blazing torch. Required to pass through the Exit door (R5-R7).",
+      "obtainable_in": null,
+      "craftable": true,
+      "recipe": ["torch", "oil"]
+    },
+    "glyph_key": {
+      "description": "A mystical key whose id is decoded from a glyph image at the Archive terminal. Required for the R2-R6 door and the Exit door. The key carries an integer id that must equal (glyph_width // 8) % 16 for the scenario's glyph_index.",
+      "obtainable_in": "R2",
+      "craftable": false,
+      "requires_action": "decode_glyph"
+    },
+    "cursed_idol": {
+      "description": "An ominous idol. Picking it up blocks ALL door-traversal and exit actions unless the epoch_phase is eclipse. It is a trap item — the canonical solution does not require it.",
+      "obtainable_in": "R6",
+      "craftable": false
+    }
+  }
+}

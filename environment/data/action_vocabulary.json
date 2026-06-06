@@ -1,0 +1,45 @@
+{
+  "description": "Exhaustive list of action types the policy must handle.",
+  "actions": [
+    {
+      "type": "look",
+      "fields": [],
+      "description": "Observe the current room. Always allowed regardless of state."
+    },
+    {
+      "type": "move",
+      "fields": ["room"],
+      "description": "Move from current_room to an adjacent room. Requires the door's item (if any) in inventory. Blocked by cursed_idol unless eclipse."
+    },
+    {
+      "type": "take",
+      "fields": ["item"],
+      "description": "Pick up an item present in current_room (i.e. item is in available_items)."
+    },
+    {
+      "type": "combine",
+      "fields": ["item1", "item2"],
+      "description": "Craft a new item from two items in inventory. Only valid combinations are (stick, rock) and (torch, oil). Order does not matter."
+    },
+    {
+      "type": "use",
+      "fields": ["item"],
+      "description": "Use an item from inventory. Allowed when item is in inventory."
+    },
+    {
+      "type": "decode_glyph",
+      "fields": [],
+      "description": "Decode the glyph at the Archive terminal. Only allowed in R2. Grants glyph_key with the computed integer id."
+    },
+    {
+      "type": "teleport",
+      "fields": ["room"],
+      "description": "Teleport to a previously-unlocked, transitively reachable room via the wormhole pad. Only available in R6. Blocked by cursed_idol unless eclipse."
+    },
+    {
+      "type": "exit",
+      "fields": [],
+      "description": "Exit through the final door (R5 to R7). Requires lit_torch and glyph_key (correct id) in inventory, player in R5, and no active curse."
+    }
+  ]
+}

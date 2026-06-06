@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EscapeRoomGameState",
+  "description": "The complete game state passed as OPA input on every policy call.",
+  "type": "object",
+  "required": ["current_room", "inventory", "unlocked_rooms", "epoch_phase", "glyph_index"],
+  "properties": {
+    "current_room": {
+      "type": "string",
+      "enum": ["R0","R1","R2","R3","R4","R5","R6","R7"],
+      "description": "Room the player is currently in."
+    },
+    "inventory": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Items currently held by the player."
+    },
+    "unlocked_rooms": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["R0","R1","R2","R3","R4","R5","R6","R7"] },
+      "description": "Every room the player has legally entered so far (used by the wormhole reachability rule)."
+    },
+    "glyph_key_id": {
+      "type": ["integer", "null"],
+      "description": "The integer id carried by the glyph_key item once decoded. null if not yet decoded."
+    },
+    "epoch_phase": {
+      "type": "string",
+      "enum": ["normal", "eclipse"],
+      "description": "Scenario-injected phase. eclipse overrides the cursed_idol block."
+    },
+    "glyph_index": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Which glyph PNG to use for decode_glyph (0-3). Injected per scenario."
+    },
+    "available_items": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Items present in current_room that the player has not yet picked up. Required when action.type is 'take' or when computing allowed_actions."
+    },
+    "action": {
+      "$ref": "#/definitions/Action",
+      "description": "The action being evaluated. Omit (or set to null) for allowed_actions queries."
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["look","move","take","combine","use","teleport","decode_glyph","exit"]
+        },
+        "room":  { "type": "string" },
+        "item":  { "type": "string" },
+        "item1": { "type": "string" },
+        "item2": { "type": "string" }
+      }
+    }
+  }
+}

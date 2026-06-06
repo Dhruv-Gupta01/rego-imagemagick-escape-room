@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GlyphMeta",
+  "description": "Shape of /app/glyphs/glyph_meta.json — written by generate_glyphs.sh at docker build time.",
+  "type": "object",
+  "description": "Keys are string glyph indices (\"0\", \"1\", \"2\", \"3\").",
+  "additionalProperties": {
+    "type": "object",
+    "required": ["width", "height", "path"],
+    "properties": {
+      "width": {
+        "type": "integer",
+        "description": "Pixel width of the glyph PNG. Used in glyph_key_id = (width // 8) % 16."
+      },
+      "height": {
+        "type": "integer",
+        "description": "Pixel height of the glyph PNG."
+      },
+      "path": {
+        "type": "string",
+        "description": "Absolute path inside the container, e.g. /app/glyphs/glyph_0.png."
+      }
+    }
+  },
+  "example": {
+    "0": { "width": 112, "height": 112, "path": "/app/glyphs/glyph_0.png" },
+    "1": { "width": 144, "height": 144, "path": "/app/glyphs/glyph_1.png" },
+    "2": { "width": 192, "height": 192, "path": "/app/glyphs/glyph_2.png" },
+    "3": { "width": 160, "height": 160, "path": "/app/glyphs/glyph_3.png" }
+  }
+}

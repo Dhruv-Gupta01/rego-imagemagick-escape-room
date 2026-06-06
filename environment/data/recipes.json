@@ -1,0 +1,14 @@
+{
+  "recipes": [
+    {
+      "ingredients": ["stick", "rock"],
+      "result": "hammer",
+      "note": "Order of ingredients does not matter."
+    },
+    {
+      "ingredients": ["torch", "oil"],
+      "result": "lit_torch",
+      "note": "Order of ingredients does not matter."
+    }
+  ]
+}

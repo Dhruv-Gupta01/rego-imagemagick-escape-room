@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Action",
+  "description": "An action submitted to the policy for evaluation.",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["look","move","take","combine","use","teleport","decode_glyph","exit"]
+    },
+    "room": {
+      "type": "string",
+      "enum": ["R0","R1","R2","R3","R4","R5","R6","R7"],
+      "description": "Target room for move or teleport actions."
+    },
+    "item": {
+      "type": "string",
+      "description": "Item name for take or use actions."
+    },
+    "item1": {
+      "type": "string",
+      "description": "First ingredient for combine actions."
+    },
+    "item2": {
+      "type": "string",
+      "description": "Second ingredient for combine actions."
+    }
+  },
+  "examples": [
+    { "type": "look" },
+    { "type": "move", "room": "R1" },
+    { "type": "take", "item": "brass_key" },
+    { "type": "combine", "item1": "stick", "item2": "rock" },
+    { "type": "use", "item": "hammer" },
+    { "type": "decode_glyph" },
+    { "type": "teleport", "room": "R3" },
+    { "type": "exit" }
+  ]
+}

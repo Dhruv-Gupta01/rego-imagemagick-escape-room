@@ -1,0 +1,22 @@
+{
+  "description": "Pre-computed adjacency list for the room graph. Mirrors the door edges in rooms.json. Useful for agents that want to reason about the graph without parsing the door list.",
+  "adjacency": {
+    "R0": ["R1"],
+    "R1": ["R0", "R2", "R3"],
+    "R2": ["R1", "R6"],
+    "R3": ["R1", "R4"],
+    "R4": ["R3", "R6"],
+    "R5": ["R6"],
+    "R6": ["R2", "R4", "R5"],
+    "R7": []
+  },
+  "door_requirements": {
+    "R1->R2": "brass_key",
+    "R2->R1": "brass_key",
+    "R3->R4": "hammer",
+    "R4->R3": "hammer",
+    "R2->R6": "glyph_key (with correct id)",
+    "R6->R2": "glyph_key (with correct id)",
+    "R5->R7": "lit_torch AND glyph_key (with correct id); blocked by cursed_idol unless eclipse"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "description": "Explicit door requirement lookup keyed by 'from->to'. Separated from rooms.json so agents and tools can query requirements without traversing the full room graph.",
+  "requirements": {
+    "R0->R1": { "items": [], "notes": "No requirement." },
+    "R1->R0": { "items": [], "notes": "No requirement." },
+    "R1->R2": { "items": ["brass_key"], "notes": "brass_key must be in inventory." },
+    "R2->R1": { "items": ["brass_key"], "notes": "brass_key must be in inventory." },
+    "R1->R3": { "items": [], "notes": "No requirement." },
+    "R3->R1": { "items": [], "notes": "No requirement." },
+    "R3->R4": { "items": ["hammer"], "notes": "hammer must be in inventory." },
+    "R4->R3": { "items": ["hammer"], "notes": "hammer must be in inventory." },
+    "R2->R6": { "items": ["glyph_key"], "notes": "glyph_key must be in inventory AND glyph_key_id must equal the computed id." },
+    "R6->R2": { "items": ["glyph_key"], "notes": "glyph_key must be in inventory AND glyph_key_id must equal the computed id." },
+    "R4->R6": { "items": [], "notes": "No requirement." },
+    "R6->R4": { "items": [], "notes": "No requirement." },
+    "R6->R5": { "items": [], "notes": "No requirement." },
+    "R5->R6": { "items": [], "notes": "No requirement." },
+    "R5->R7": {
+      "items": ["lit_torch", "glyph_key"],
+      "notes": "lit_torch AND glyph_key (with correct id) required. Also blocked if player holds cursed_idol unless epoch_phase is eclipse. Use the 'exit' action (not 'move')."
+    }
+  }
+}

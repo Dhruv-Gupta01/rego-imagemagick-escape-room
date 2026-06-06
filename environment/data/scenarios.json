@@ -1,0 +1,39 @@
+{
+  "scenarios": [
+    {
+      "id": "canonical",
+      "description": "Standard run. Normal epoch, glyph index 0. Expected glyph_key_id = (112 // 8) % 16 = 14.",
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "expected_glyph_key_id": 14
+    },
+    {
+      "id": "eclipse_override",
+      "description": "Eclipse phase active. Cursed idol no longer blocks doors or exit. Glyph index 1. Expected glyph_key_id = (144 // 8) % 16 = 2.",
+      "epoch_phase": "eclipse",
+      "glyph_index": 1,
+      "expected_glyph_key_id": 2
+    },
+    {
+      "id": "alt_glyph_2",
+      "description": "Alternate glyph, index 2. Normal epoch. Expected glyph_key_id = (192 // 8) % 16 = 8.",
+      "epoch_phase": "normal",
+      "glyph_index": 2,
+      "expected_glyph_key_id": 8
+    },
+    {
+      "id": "alt_glyph_3",
+      "description": "Alternate glyph, index 3. Normal epoch. Expected glyph_key_id = (160 // 8) % 16 = 4.",
+      "epoch_phase": "normal",
+      "glyph_index": 3,
+      "expected_glyph_key_id": 4
+    },
+    {
+      "id": "cursed_normal",
+      "description": "Player picks up cursed_idol. Normal epoch — idol blocks all doors and exit.",
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "expected_glyph_key_id": 14
+    }
+  ]
+}

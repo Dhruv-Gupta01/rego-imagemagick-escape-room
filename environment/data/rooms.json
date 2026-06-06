@@ -1,0 +1,68 @@
+{
+  "rooms": {
+    "R0": {
+      "name": "Atrium",
+      "description": "The starting chamber. Faint light filters through dusty skylights. A brass key rests on a pedestal."
+    },
+    "R1": {
+      "name": "Gallery",
+      "description": "Paintings line the walls, each depicting a strange ritual. A wooden stick leans against the far wall."
+    },
+    "R2": {
+      "name": "Archive",
+      "description": "Rows of cabinets hold ancient records. A glyph terminal glows in the corner — it can decode glyphs into keys."
+    },
+    "R3": {
+      "name": "Workshop",
+      "description": "A crafting bench dominates the centre. A rock sits beneath the bench."
+    },
+    "R4": {
+      "name": "Conservatory",
+      "description": "Glass panels reveal a starlit courtyard. An unlit torch and a flask of oil sit on a shelf."
+    },
+    "R5": {
+      "name": "Antechamber",
+      "description": "The final corridor before the exit. The air is charged with energy."
+    },
+    "R6": {
+      "name": "Mirror Hall",
+      "description": "Reflections multiply infinitely. A glowing wormhole pad pulses on the floor. A cursed idol rests on a plinth — handle with care."
+    },
+    "R7": {
+      "name": "Exit",
+      "description": "Freedom. The escape room is solved."
+    }
+  },
+  "doors": [
+    { "from": "R0", "to": "R1", "requires": null },
+    { "from": "R1", "to": "R0", "requires": null },
+    { "from": "R1", "to": "R2", "requires": "brass_key" },
+    { "from": "R2", "to": "R1", "requires": "brass_key" },
+    { "from": "R1", "to": "R3", "requires": null },
+    { "from": "R3", "to": "R1", "requires": null },
+    { "from": "R3", "to": "R4", "requires": "hammer" },
+    { "from": "R4", "to": "R3", "requires": "hammer" },
+    { "from": "R2", "to": "R6", "requires": "glyph_key" },
+    { "from": "R6", "to": "R2", "requires": "glyph_key" },
+    { "from": "R4", "to": "R6", "requires": null },
+    { "from": "R6", "to": "R4", "requires": null },
+    { "from": "R6", "to": "R5", "requires": null },
+    { "from": "R5", "to": "R6", "requires": null }
+  ],
+  "exit_door": {
+    "from": "R5",
+    "to": "R7",
+    "requires": ["lit_torch", "glyph_key"],
+    "note": "Also blocked if player holds cursed_idol unless epoch_phase is eclipse"
+  },
+  "items_in_rooms": {
+    "R0": ["brass_key"],
+    "R1": ["stick"],
+    "R2": [],
+    "R3": ["rock"],
+    "R4": ["torch", "oil"],
+    "R5": [],
+    "R6": ["cursed_idol"],
+    "R7": []
+  }
+}
