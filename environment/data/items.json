@@ -44,8 +44,28 @@
       "requires_action": "decode_glyph"
     },
     "cursed_idol": {
-      "description": "An ominous idol. Picking it up blocks ALL door-traversal and exit actions unless the epoch_phase is eclipse. It is a trap item — the canonical solution does not require it.",
+      "description": "An ominous idol. In the normal epoch, holding it blocks all move/teleport/exit actions; eclipse lifts the curse. It is a trap item — the canonical solution does not require it.",
       "obtainable_in": "R6",
+      "craftable": false
+    },
+    "master_seal": {
+      "description": "A seal-breaker talisman. During the 'sealed' epoch phase, movement is blocked unless master_seal is in inventory.",
+      "obtainable_in": "R6",
+      "craftable": false
+    },
+    "key_red": {
+      "description": "Red colour key. One of three colour keys; ALL three (key_red, key_green, key_blue) are required to use the exit and to win.",
+      "obtainable_in": "R1",
+      "craftable": false
+    },
+    "key_green": {
+      "description": "Green colour key. One of three colour keys required for the exit and the win condition.",
+      "obtainable_in": "R3",
+      "craftable": false
+    },
+    "key_blue": {
+      "description": "Blue colour key. One of three colour keys required for the exit and the win condition.",
+      "obtainable_in": "R4",
       "craftable": false
     }
   }

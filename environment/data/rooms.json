@@ -57,12 +57,12 @@
   },
   "items_in_rooms": {
     "R0": ["brass_key"],
-    "R1": ["stick"],
+    "R1": ["stick", "key_red"],
     "R2": [],
-    "R3": ["rock"],
-    "R4": ["torch", "oil"],
+    "R3": ["rock", "key_green"],
+    "R4": ["torch", "oil", "key_blue"],
     "R5": [],
-    "R6": ["cursed_idol"],
+    "R6": ["cursed_idol", "master_seal"],
     "R7": []
   }
 }

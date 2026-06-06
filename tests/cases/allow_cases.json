@@ -1,7 +1,7 @@
 [
   {
     "id": "look_always_allowed",
-    "description": "look is always allowed regardless of inventory or curse",
+    "description": "look always",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -11,9 +11,7 @@
       "glyph_key_id": null,
       "epoch_phase": "normal",
       "glyph_index": 0,
-      "available_items": [
-        "brass_key"
-      ],
+      "available_items": [],
       "action": {
         "type": "look"
       }
@@ -23,7 +21,7 @@
   },
   {
     "id": "take_brass_key_r0",
-    "description": "take brass_key when it is in available_items",
+    "description": "take present",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -45,8 +43,34 @@
     "expected": true
   },
   {
+    "id": "take_key_red_r1",
+    "description": "take colour key",
+    "input": {
+      "current_room": "R1",
+      "inventory": [
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R1"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [
+        "stick",
+        "key_red"
+      ],
+      "action": {
+        "type": "take",
+        "item": "key_red"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "move_r0_to_r1_no_req",
-    "description": "move R0->R1 has no item requirement",
+    "description": "move no req",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -67,7 +91,7 @@
   },
   {
     "id": "move_r1_to_r2_with_brass_key",
-    "description": "move R1->R2 allowed when brass_key in inventory",
+    "description": "move brass",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -91,13 +115,10 @@
   },
   {
     "id": "move_r3_to_r4_with_hammer",
-    "description": "move R3->R4 allowed when hammer in inventory",
+    "description": "move hammer",
     "input": {
       "current_room": "R3",
       "inventory": [
-        "brass_key",
-        "stick",
-        "rock",
         "hammer"
       ],
       "unlocked_rooms": [
@@ -119,7 +140,7 @@
   },
   {
     "id": "combine_stick_rock",
-    "description": "combine stick + rock is a valid recipe",
+    "description": "combine",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -127,8 +148,6 @@
         "rock"
       ],
       "unlocked_rooms": [
-        "R0",
-        "R1",
         "R3"
       ],
       "glyph_key_id": null,
@@ -145,8 +164,33 @@
     "expected": true
   },
   {
+    "id": "combine_rock_stick_reverse",
+    "description": "combine rev",
+    "input": {
+      "current_room": "R3",
+      "inventory": [
+        "stick",
+        "rock"
+      ],
+      "unlocked_rooms": [
+        "R3"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "combine",
+        "item1": "rock",
+        "item2": "stick"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "combine_torch_oil",
-    "description": "combine torch + oil is a valid recipe",
+    "description": "combine",
     "input": {
       "current_room": "R4",
       "inventory": [
@@ -154,9 +198,6 @@
         "oil"
       ],
       "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R3",
         "R4"
       ],
       "glyph_key_id": null,
@@ -173,8 +214,33 @@
     "expected": true
   },
   {
+    "id": "combine_oil_torch_reverse",
+    "description": "combine rev",
+    "input": {
+      "current_room": "R4",
+      "inventory": [
+        "torch",
+        "oil"
+      ],
+      "unlocked_rooms": [
+        "R4"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "combine",
+        "item1": "oil",
+        "item2": "torch"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "decode_glyph_in_r2",
-    "description": "decode_glyph is allowed in R2",
+    "description": "decode R2",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -197,8 +263,31 @@
     "expected": true
   },
   {
+    "id": "use_item_in_inventory",
+    "description": "use held",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "use",
+        "item": "brass_key"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "move_r2_to_r6_correct_glyph_id",
-    "description": "move R2->R6 allowed with glyph_key and correct id (index 0 -> id 14)",
+    "description": "move R2->R6 id14",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -223,15 +312,44 @@
     "expected": true
   },
   {
-    "id": "exit_clean_no_idol_glyph_index_0",
-    "description": "exit allowed from R5 with full requirements, no curse, glyph_index=0 id=14",
+    "id": "teleport_reachable_unlocked",
+    "description": "teleport reachable",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
+    "id": "exit_clean_full_kit_idx0",
+    "description": "exit full kit",
     "input": {
       "current_room": "R5",
       "inventory": [
-        "brass_key",
         "hammer",
         "lit_torch",
-        "glyph_key"
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
       ],
       "unlocked_rooms": [
         "R0",
@@ -254,14 +372,17 @@
     "expected": true
   },
   {
-    "id": "exit_cursed_but_eclipse",
-    "description": "exit allowed with cursed_idol when epoch_phase==eclipse \u2014 Lever 3 exception; glyph_index=1 id=2",
+    "id": "exit_eclipse_with_idol",
+    "description": "exit eclipse+idol",
     "input": {
       "current_room": "R5",
       "inventory": [
         "hammer",
         "lit_torch",
         "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
         "cursed_idol"
       ],
       "unlocked_rooms": [
@@ -285,26 +406,79 @@
     "expected": true
   },
   {
-    "id": "teleport_to_reachable_unlocked_room",
-    "description": "teleport R1 from R6 is allowed when R1 is unlocked and reachable through hammer-passable edges",
+    "id": "exit_sealed_with_master_seal",
+    "description": "exit sealed+seal",
     "input": {
-      "current_room": "R6",
+      "current_room": "R5",
       "inventory": [
         "hammer",
-        "brass_key"
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "master_seal"
       ],
       "unlocked_rooms": [
+        "R0",
         "R1",
+        "R2",
         "R3",
         "R4",
+        "R5",
         "R6"
       ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
       "glyph_index": 0,
       "available_items": [],
       "action": {
-        "type": "teleport",
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
+    "id": "move_sealed_with_master_seal",
+    "description": "move sealed+seal",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
+    "id": "move_eclipse_with_idol",
+    "description": "move eclipse+idol",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
         "room": "R1"
       }
     },

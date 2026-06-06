@@ -1,7 +1,7 @@
 [
   {
     "id": "move_r2_no_brass_key",
-    "description": "move R1->R2 denied when brass_key not in inventory",
+    "description": "move needs brass",
     "input": {
       "current_room": "R1",
       "inventory": [],
@@ -12,9 +12,7 @@
       "glyph_key_id": null,
       "epoch_phase": "normal",
       "glyph_index": 0,
-      "available_items": [
-        "stick"
-      ],
+      "available_items": [],
       "action": {
         "type": "move",
         "room": "R2"
@@ -25,7 +23,7 @@
   },
   {
     "id": "move_r4_no_hammer",
-    "description": "move R3->R4 denied when hammer not in inventory",
+    "description": "move needs hammer",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -51,7 +49,7 @@
   },
   {
     "id": "move_r6_from_r2_no_glyph_key",
-    "description": "move R2->R6 denied when glyph_key absent entirely",
+    "description": "no glyph_key",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -76,7 +74,7 @@
   },
   {
     "id": "move_r6_wrong_glyph_id_index0",
-    "description": "move R2->R6 denied when glyph_key present but id is wrong (index 0 expects 14, got 99)",
+    "description": "wrong id",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -102,7 +100,7 @@
   },
   {
     "id": "move_r6_hardcoded_14_fails_index2",
-    "description": "glyph_index=2 expects id=8; hardcoded id=14 must be denied \u2014 catches constant-hardcoding",
+    "description": "hc14 idx2",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -128,7 +126,7 @@
   },
   {
     "id": "move_r6_hardcoded_14_fails_index3",
-    "description": "glyph_index=3 expects id=4; hardcoded id=14 must be denied",
+    "description": "hc14 idx3",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -154,13 +152,16 @@
   },
   {
     "id": "exit_wrong_glyph_id",
-    "description": "exit denied when glyph_key_id does not match computed value for index 1 (expects 2, got 14)",
+    "description": "wrong id idx1",
     "input": {
       "current_room": "R5",
       "inventory": [
         "hammer",
         "lit_torch",
-        "glyph_key"
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
       ],
       "unlocked_rooms": [
         "R0",
@@ -184,12 +185,15 @@
   },
   {
     "id": "exit_no_lit_torch",
-    "description": "exit denied when lit_torch is absent",
+    "description": "no lit_torch",
     "input": {
       "current_room": "R5",
       "inventory": [
         "hammer",
-        "glyph_key"
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
       ],
       "unlocked_rooms": [
         "R0",
@@ -213,12 +217,15 @@
   },
   {
     "id": "exit_no_glyph_key",
-    "description": "exit denied when glyph_key is absent",
+    "description": "no glyph_key",
     "input": {
       "current_room": "R5",
       "inventory": [
         "hammer",
-        "lit_torch"
+        "lit_torch",
+        "key_red",
+        "key_green",
+        "key_blue"
       ],
       "unlocked_rooms": [
         "R0",
@@ -242,13 +249,16 @@
   },
   {
     "id": "exit_wrong_room",
-    "description": "exit denied when not in R5",
+    "description": "not R5",
     "input": {
       "current_room": "R1",
       "inventory": [
         "hammer",
         "lit_torch",
-        "glyph_key"
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
       ],
       "unlocked_rooms": [
         "R0",
@@ -266,14 +276,79 @@
     "expected": false
   },
   {
-    "id": "exit_cursed_no_eclipse",
-    "description": "exit denied with cursed_idol in inventory and epoch_phase==normal \u2014 Lever 3 curse active",
+    "id": "exit_missing_one_color_key",
+    "description": "missing blue",
     "input": {
       "current_room": "R5",
       "inventory": [
         "hammer",
         "lit_torch",
         "glyph_key",
+        "key_red",
+        "key_green"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_missing_all_color_keys",
+    "description": "no colours",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_cursed_normal_blocked",
+    "description": "curse blocks",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
         "cursed_idol"
       ],
       "unlocked_rooms": [
@@ -297,8 +372,41 @@
     "expected": false
   },
   {
+    "id": "exit_sealed_no_master_seal",
+    "description": "sealed blocks",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "move_cursed_no_eclipse",
-    "description": "move denied with cursed_idol and normal epoch even though door has no item requirement",
+    "description": "curse blocks move",
     "input": {
       "current_room": "R0",
       "inventory": [
@@ -320,8 +428,29 @@
     "expected": false
   },
   {
+    "id": "move_sealed_no_master_seal",
+    "description": "sealed blocks move",
+    "input": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "teleport_cursed_no_eclipse",
-    "description": "teleport denied with cursed_idol and normal epoch",
+    "description": "curse blocks tp",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -347,8 +476,34 @@
     "expected": false
   },
   {
+    "id": "teleport_sealed_no_master_seal",
+    "description": "sealed blocks tp",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R4"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "teleport_not_in_r6",
-    "description": "teleport denied when player is not in R6 (wormhole pad is in R6 only)",
+    "description": "only from R6",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -375,7 +530,7 @@
   },
   {
     "id": "teleport_room_not_unlocked",
-    "description": "teleport denied to a room that has never been visited (R0 not in unlocked_rooms)",
+    "description": "not unlocked",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -400,8 +555,8 @@
     "expected": false
   },
   {
-    "id": "teleport_unlocked_but_unreachable",
-    "description": "teleport R2 denied even though R2 is in unlocked_rooms \u2014 R6->R2 door requires glyph_key which is absent, and all other paths to R2 are outside unlocked_rooms; tests transitive-closure correctness",
+    "id": "teleport_unreachable_isolated",
+    "description": "unreachable R2",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -426,34 +581,8 @@
     "expected": false
   },
   {
-    "id": "teleport_r0_also_unreachable_in_isolated_r6",
-    "description": "same isolation state \u2014 teleport R0 also denied (R6 is isolated in unlocked graph)",
-    "input": {
-      "current_room": "R6",
-      "inventory": [
-        "brass_key"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R6"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "teleport",
-        "room": "R0"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
     "id": "decode_glyph_not_in_r2",
-    "description": "decode_glyph denied when not in R2",
+    "description": "decode not R2",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -473,7 +602,7 @@
   },
   {
     "id": "take_item_not_in_room",
-    "description": "take denied when item is not in available_items",
+    "description": "take absent",
     "input": {
       "current_room": "R1",
       "inventory": [],
@@ -497,7 +626,7 @@
   },
   {
     "id": "combine_invalid_recipe",
-    "description": "combine denied when no recipe exists for the pair",
+    "description": "no recipe",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -505,8 +634,6 @@
         "rock"
       ],
       "unlocked_rooms": [
-        "R0",
-        "R1",
         "R3"
       ],
       "glyph_key_id": null,
@@ -517,6 +644,62 @@
         "type": "combine",
         "item1": "brass_key",
         "item2": "rock"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "move_r7_denied",
+    "description": "move R7 denied",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R7"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "use_item_not_in_inventory",
+    "description": "use not held",
+    "input": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "use",
+        "item": "hammer"
       }
     },
     "query": "data.escape.allow",

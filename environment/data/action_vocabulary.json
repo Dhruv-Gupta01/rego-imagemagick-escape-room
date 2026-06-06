@@ -9,7 +9,7 @@
     {
       "type": "move",
       "fields": ["room"],
-      "description": "Move from current_room to an adjacent room. Requires the door's item (if any) in inventory. Blocked by cursed_idol unless eclipse."
+      "description": "Move from current_room to an adjacent room. Requires the door's item (if any) in inventory. Denied when movement is blocked by the epoch/master_seal lattice (instruction §7)."
     },
     {
       "type": "take",
@@ -34,12 +34,12 @@
     {
       "type": "teleport",
       "fields": ["room"],
-      "description": "Teleport to a previously-unlocked, transitively reachable room via the wormhole pad. Only available in R6. Blocked by cursed_idol unless eclipse."
+      "description": "Teleport to a previously-unlocked, transitively reachable room via the wormhole pad. Only available in R6. Denied when movement is blocked by the epoch/master_seal lattice (instruction §7)."
     },
     {
       "type": "exit",
       "fields": [],
-      "description": "Exit through the final door (R5 to R7). Requires lit_torch and glyph_key (correct id) in inventory, player in R5, and no active curse."
+      "description": "Exit through the final door (R5 to R7). Player in R5; not movement-blocked (§7); requires lit_torch, glyph_key (correct id), and ALL three colour keys (key_red, key_green, key_blue) in inventory."
     }
   ]
 }

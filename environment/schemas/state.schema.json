@@ -26,8 +26,8 @@
     },
     "epoch_phase": {
       "type": "string",
-      "enum": ["normal", "eclipse"],
-      "description": "Scenario-injected phase. eclipse overrides the cursed_idol block."
+      "enum": ["normal", "eclipse", "sealed"],
+      "description": "Scenario-injected phase. eclipse lifts the cursed_idol block; sealed blocks movement unless master_seal is held (see instruction §7)."
     },
     "glyph_index": {
       "type": "integer",

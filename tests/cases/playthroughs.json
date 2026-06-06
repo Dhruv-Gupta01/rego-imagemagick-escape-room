@@ -1,115 +1,638 @@
 [
   {
     "id": "canonical_win",
-    "description": "Full canonical solution path. glyph_index=0, id=14. Every step must be allowed; final state must satisfy win.",
+    "description": "Full canonical solution including the three colour keys; every step must be allowed and the final state must win.",
     "steps": [
       {
         "description": "R0: take brass_key",
-        "state": {"current_room":"R0","inventory":[],"unlocked_rooms":["R0"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":["brass_key"]},
-        "action": {"type":"take","item":"brass_key"},
+        "state": {
+          "current_room": "R0",
+          "inventory": [],
+          "unlocked_rooms": [
+            "R0"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "brass_key"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "brass_key"
+        },
         "expected_allow": true
       },
       {
-        "description": "R0->R1: no requirement",
-        "state": {"current_room":"R0","inventory":["brass_key"],"unlocked_rooms":["R0"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R1"},
+        "description": "R0->R1 (no req)",
+        "state": {
+          "current_room": "R0",
+          "inventory": [
+            "brass_key"
+          ],
+          "unlocked_rooms": [
+            "R0"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R1"
+        },
         "expected_allow": true
       },
       {
         "description": "R1: take stick",
-        "state": {"current_room":"R1","inventory":["brass_key"],"unlocked_rooms":["R0","R1"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":["stick"]},
-        "action": {"type":"take","item":"stick"},
+        "state": {
+          "current_room": "R1",
+          "inventory": [
+            "brass_key"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "stick",
+            "key_red"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "stick"
+        },
         "expected_allow": true
       },
       {
-        "description": "R1->R3: no requirement",
-        "state": {"current_room":"R1","inventory":["brass_key","stick"],"unlocked_rooms":["R0","R1"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R3"},
+        "description": "R1: take key_red",
+        "state": {
+          "current_room": "R1",
+          "inventory": [
+            "brass_key",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "stick",
+            "key_red"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "key_red"
+        },
+        "expected_allow": true
+      },
+      {
+        "description": "R1->R3 (no req)",
+        "state": {
+          "current_room": "R1",
+          "inventory": [
+            "brass_key",
+            "key_red",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R3"
+        },
         "expected_allow": true
       },
       {
         "description": "R3: take rock",
-        "state": {"current_room":"R3","inventory":["brass_key","stick"],"unlocked_rooms":["R0","R1","R3"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":["rock"]},
-        "action": {"type":"take","item":"rock"},
+        "state": {
+          "current_room": "R3",
+          "inventory": [
+            "brass_key",
+            "key_red",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "rock",
+            "key_green"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "rock"
+        },
         "expected_allow": true
       },
       {
-        "description": "R3: combine stick + rock -> hammer",
-        "state": {"current_room":"R3","inventory":["brass_key","stick","rock"],"unlocked_rooms":["R0","R1","R3"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"combine","item1":"stick","item2":"rock"},
+        "description": "R3: take key_green",
+        "state": {
+          "current_room": "R3",
+          "inventory": [
+            "brass_key",
+            "key_red",
+            "rock",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "rock",
+            "key_green"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "key_green"
+        },
         "expected_allow": true
       },
       {
-        "description": "R3->R4: hammer in inventory",
-        "state": {"current_room":"R3","inventory":["brass_key","stick","rock","hammer"],"unlocked_rooms":["R0","R1","R3"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R4"},
+        "description": "R3: combine stick+rock -> hammer",
+        "state": {
+          "current_room": "R3",
+          "inventory": [
+            "brass_key",
+            "key_green",
+            "key_red",
+            "rock",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "combine",
+          "item1": "stick",
+          "item2": "rock"
+        },
+        "expected_allow": true
+      },
+      {
+        "description": "R3->R4 (hammer)",
+        "state": {
+          "current_room": "R3",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_green",
+            "key_red",
+            "rock",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R4"
+        },
         "expected_allow": true
       },
       {
         "description": "R4: take torch",
-        "state": {"current_room":"R4","inventory":["brass_key","stick","rock","hammer"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":["torch","oil"]},
-        "action": {"type":"take","item":"torch"},
+        "state": {
+          "current_room": "R4",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_green",
+            "key_red",
+            "rock",
+            "stick"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "torch",
+            "oil",
+            "key_blue"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "torch"
+        },
         "expected_allow": true
       },
       {
         "description": "R4: take oil",
-        "state": {"current_room":"R4","inventory":["brass_key","stick","rock","hammer","torch"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":["oil"]},
-        "action": {"type":"take","item":"oil"},
+        "state": {
+          "current_room": "R4",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_green",
+            "key_red",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "oil",
+            "key_blue"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "oil"
+        },
         "expected_allow": true
       },
       {
-        "description": "R4: combine torch + oil -> lit_torch",
-        "state": {"current_room":"R4","inventory":["brass_key","stick","rock","hammer","torch","oil"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"combine","item1":"torch","item2":"oil"},
+        "description": "R4: take key_blue",
+        "state": {
+          "current_room": "R4",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_green",
+            "key_red",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "key_blue"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "key_blue"
+        },
         "expected_allow": true
       },
       {
-        "description": "R4->R3: hammer in inventory (return trip)",
-        "state": {"current_room":"R4","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R3"},
+        "description": "R4: combine torch+oil -> lit_torch",
+        "state": {
+          "current_room": "R4",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "combine",
+          "item1": "torch",
+          "item2": "oil"
+        },
         "expected_allow": true
       },
       {
-        "description": "R3->R1: no requirement",
-        "state": {"current_room":"R3","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R1"},
+        "description": "R4->R3 (hammer, return)",
+        "state": {
+          "current_room": "R4",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R3"
+        },
         "expected_allow": true
       },
       {
-        "description": "R1->R2: brass_key in inventory",
-        "state": {"current_room":"R1","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch"],"unlocked_rooms":["R0","R1","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R2"},
+        "description": "R3->R1 (no req)",
+        "state": {
+          "current_room": "R3",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R1"
+        },
         "expected_allow": true
       },
       {
-        "description": "R2: decode_glyph (in Archive terminal)",
-        "state": {"current_room":"R2","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch"],"unlocked_rooms":["R0","R1","R2","R3","R4"],"glyph_key_id":null,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"decode_glyph"},
+        "description": "R1->R2 (brass_key)",
+        "state": {
+          "current_room": "R1",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R2"
+        },
         "expected_allow": true
       },
       {
-        "description": "R2->R6: glyph_key in inventory, id=14 correct for index 0",
-        "state": {"current_room":"R2","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch","glyph_key"],"unlocked_rooms":["R0","R1","R2","R3","R4"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R6"},
+        "description": "R2: decode_glyph",
+        "state": {
+          "current_room": "R2",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": null,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "decode_glyph"
+        },
         "expected_allow": true
       },
       {
-        "description": "R6->R5: no requirement",
-        "state": {"current_room":"R6","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch","glyph_key"],"unlocked_rooms":["R0","R1","R2","R3","R4","R6"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":["cursed_idol"]},
-        "action": {"type":"move","room":"R5"},
+        "description": "R2->R6 (glyph_key id=14)",
+        "state": {
+          "current_room": "R2",
+          "inventory": [
+            "brass_key",
+            "glyph_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "cursed_idol",
+            "master_seal"
+          ]
+        },
+        "action": {
+          "type": "move",
+          "room": "R6"
+        },
         "expected_allow": true
       },
       {
-        "description": "R5: exit — lit_torch + glyph_key (id=14) + not cursed",
-        "state": {"current_room":"R5","inventory":["brass_key","stick","rock","hammer","torch","oil","lit_torch","glyph_key"],"unlocked_rooms":["R0","R1","R2","R3","R4","R5","R6"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"exit"},
+        "description": "R6->R5 (no req)",
+        "state": {
+          "current_room": "R6",
+          "inventory": [
+            "brass_key",
+            "glyph_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R6"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R5"
+        },
+        "expected_allow": true
+      },
+      {
+        "description": "R5: exit (lit_torch+glyph_key id14 + all three colour keys, normal phase)",
+        "state": {
+          "current_room": "R5",
+          "inventory": [
+            "brass_key",
+            "glyph_key",
+            "hammer",
+            "key_blue",
+            "key_green",
+            "key_red",
+            "lit_torch",
+            "oil",
+            "rock",
+            "stick",
+            "torch"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R5",
+            "R6"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "exit"
+        },
         "expected_allow": true
       }
     ],
     "final_state": {
       "current_room": "R7",
-      "inventory": ["brass_key","stick","rock","hammer","torch","oil","lit_torch","glyph_key"],
-      "unlocked_rooms": ["R0","R1","R2","R3","R4","R5","R6","R7"],
+      "inventory": [
+        "brass_key",
+        "glyph_key",
+        "hammer",
+        "key_blue",
+        "key_green",
+        "key_red",
+        "lit_torch",
+        "oil",
+        "rock",
+        "stick",
+        "torch"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
       "glyph_key_id": 14,
       "epoch_phase": "normal",
       "glyph_index": 0,
@@ -119,18 +642,74 @@
   },
   {
     "id": "cursed_exit_blocked",
-    "description": "Player picks up cursed_idol in R6 then tries to exit — must be denied at exit step. epoch_phase=normal.",
+    "description": "Take cursed_idol in R6 (normal phase) then try to move to R5 \u2014 the curse blocks the move.",
     "steps": [
       {
-        "description": "R6: take cursed_idol (available in R6)",
-        "state": {"current_room":"R6","inventory":["lit_torch","glyph_key","hammer"],"unlocked_rooms":["R0","R1","R2","R3","R4","R6"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":["cursed_idol"]},
-        "action": {"type":"take","item":"cursed_idol"},
+        "description": "R6: take cursed_idol",
+        "state": {
+          "current_room": "R6",
+          "inventory": [
+            "lit_torch",
+            "glyph_key",
+            "hammer",
+            "key_red",
+            "key_green",
+            "key_blue"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R6"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "cursed_idol",
+            "master_seal"
+          ]
+        },
+        "action": {
+          "type": "take",
+          "item": "cursed_idol"
+        },
         "expected_allow": true
       },
       {
-        "description": "R6->R5: move blocked by curse",
-        "state": {"current_room":"R6","inventory":["lit_torch","glyph_key","hammer","cursed_idol"],"unlocked_rooms":["R0","R1","R2","R3","R4","R6"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R5"},
+        "description": "R6->R5: move blocked by curse (normal phase, idol held)",
+        "state": {
+          "current_room": "R6",
+          "inventory": [
+            "lit_torch",
+            "glyph_key",
+            "hammer",
+            "key_red",
+            "key_green",
+            "key_blue",
+            "cursed_idol"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R6"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": [
+            "master_seal"
+          ]
+        },
+        "action": {
+          "type": "move",
+          "room": "R5"
+        },
         "expected_allow": false
       }
     ],
@@ -138,12 +717,37 @@
   },
   {
     "id": "wrong_glyph_id_blocks_door",
-    "description": "Player has glyph_key but wrong id — R2->R6 door must be denied. Catches policies that check key presence only.",
+    "description": "glyph_key held but wrong id \u2014 R2->R6 door denied.",
     "steps": [
       {
-        "description": "R2->R6: glyph_key present but id=7 (wrong for index 0 which expects 14)",
-        "state": {"current_room":"R2","inventory":["brass_key","hammer","lit_torch","glyph_key"],"unlocked_rooms":["R0","R1","R2","R3","R4"],"glyph_key_id":7,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"move","room":"R6"},
+        "description": "R2->R6: glyph_key present but id=7 (index 0 expects 14)",
+        "state": {
+          "current_room": "R2",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "lit_torch",
+            "glyph_key",
+            "key_red",
+            "key_green",
+            "key_blue"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4"
+          ],
+          "glyph_key_id": 7,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "move",
+          "room": "R6"
+        },
         "expected_allow": false
       }
     ],
@@ -151,12 +755,37 @@
   },
   {
     "id": "exit_missing_lit_torch",
-    "description": "Player at R5 with correct glyph_key but no lit_torch — exit must be denied.",
+    "description": "At R5 with correct glyph_key and all colour keys but no lit_torch \u2014 exit denied.",
     "steps": [
       {
         "description": "R5: exit without lit_torch",
-        "state": {"current_room":"R5","inventory":["brass_key","hammer","glyph_key"],"unlocked_rooms":["R0","R1","R2","R3","R4","R5","R6"],"glyph_key_id":14,"epoch_phase":"normal","glyph_index":0,"available_items":[]},
-        "action": {"type":"exit"},
+        "state": {
+          "current_room": "R5",
+          "inventory": [
+            "brass_key",
+            "hammer",
+            "glyph_key",
+            "key_red",
+            "key_green",
+            "key_blue"
+          ],
+          "unlocked_rooms": [
+            "R0",
+            "R1",
+            "R2",
+            "R3",
+            "R4",
+            "R5",
+            "R6"
+          ],
+          "glyph_key_id": 14,
+          "epoch_phase": "normal",
+          "glyph_index": 0,
+          "available_items": []
+        },
+        "action": {
+          "type": "exit"
+        },
         "expected_allow": false
       }
     ],

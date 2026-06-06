@@ -98,7 +98,6 @@ door_passable(from, to) if {
 	door_req[from][to] == "glyph_key"
 	"glyph_key" in input.inventory
 	input.glyph_key_id == computed_glyph_key_id
-	all_color_keys
 }
 
 # ─── Wormhole reachability (Lever 2) ──────────────────────────────────────────

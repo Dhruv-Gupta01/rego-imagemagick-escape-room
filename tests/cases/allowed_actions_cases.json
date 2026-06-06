@@ -1,0 +1,1011 @@
+[
+  {
+    "id": "start_r0",
+    "description": "R0 start, brass_key available",
+    "state": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [
+        "brass_key"
+      ]
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "take"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_normal_clean",
+    "description": "R0 empty normal",
+    "state": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_cursed_normal",
+    "description": "R0 cursed normal \u2014 moves blocked",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_cursed_eclipse",
+    "description": "R0 cursed eclipse \u2014 move restored",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_sealed_empty",
+    "description": "R0 sealed no master_seal \u2014 move blocked",
+    "state": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_sealed_master",
+    "description": "R0 sealed + master_seal \u2014 move restored",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "master_seal",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_cursed_sealed",
+    "description": "R0 cursed + sealed, no seal \u2014 blocked",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r0_cursed_master_sealed",
+    "description": "R0 cursed + sealed + master_seal \u2014 restored",
+    "state": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol",
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "item": "master_seal",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r2_before_decode",
+    "description": "R2 brass_key, pre-decode",
+    "state": {
+      "current_room": "R2",
+      "inventory": [
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "type": "decode_glyph"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r2_after_decode_idx0",
+    "description": "R2 brass+glyph id14 idx0",
+    "state": {
+      "current_room": "R2",
+      "inventory": [
+        "brass_key",
+        "glyph_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "use"
+      },
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "decode_glyph"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r2_after_decode_idx2",
+    "description": "R2 brass+glyph id8 idx2",
+    "state": {
+      "current_room": "R2",
+      "inventory": [
+        "brass_key",
+        "glyph_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2"
+      ],
+      "glyph_key_id": 8,
+      "epoch_phase": "normal",
+      "glyph_index": 2,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "use"
+      },
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "move"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "decode_glyph"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r1_take_stick_keyred",
+    "description": "R1 brass, stick+key_red available",
+    "state": {
+      "current_room": "R1",
+      "inventory": [
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [
+        "stick",
+        "key_red"
+      ]
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "take"
+      },
+      {
+        "item": "stick",
+        "type": "take"
+      },
+      {
+        "room": "R0",
+        "type": "move"
+      },
+      {
+        "room": "R2",
+        "type": "move"
+      },
+      {
+        "room": "R3",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_normal",
+    "description": "R5 full kit normal \u2014 exit available",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "exit"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_idx3",
+    "description": "R5 full kit id4 idx3 \u2014 exit available",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 4,
+      "epoch_phase": "normal",
+      "glyph_index": 3,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "exit"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_missing_blue_normal",
+    "description": "R5 missing key_blue \u2014 no exit",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_cursed_normal",
+    "description": "R5 full kit + cursed normal \u2014 blocked",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_sealed_noseal",
+    "description": "R5 full kit sealed no master_seal \u2014 blocked",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_sealed_master",
+    "description": "R5 full kit sealed + master_seal \u2014 exit restored",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "item": "master_seal",
+        "type": "use"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "exit"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r5_full_kit_eclipse_idol",
+    "description": "R5 full kit + idol eclipse \u2014 exit allowed",
+    "state": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "item": "glyph_key",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "key_blue",
+        "type": "use"
+      },
+      {
+        "item": "key_green",
+        "type": "use"
+      },
+      {
+        "item": "key_red",
+        "type": "use"
+      },
+      {
+        "item": "lit_torch",
+        "type": "use"
+      },
+      {
+        "room": "R6",
+        "type": "move"
+      },
+      {
+        "type": "exit"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_partial_hammer",
+    "description": "R6 hammer, partial unlock \u2014 teleport set",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "teleport"
+      },
+      {
+        "room": "R3",
+        "type": "teleport"
+      },
+      {
+        "room": "R4",
+        "type": "move"
+      },
+      {
+        "room": "R4",
+        "type": "teleport"
+      },
+      {
+        "room": "R5",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_isolated",
+    "description": "R6 isolated \u2014 no teleport",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "brass_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "brass_key",
+        "type": "use"
+      },
+      {
+        "room": "R4",
+        "type": "move"
+      },
+      {
+        "room": "R5",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_cursed_normal",
+    "description": "R6 cursed normal \u2014 move/teleport blocked",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "cursed_idol",
+        "type": "use"
+      },
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  },
+  {
+    "id": "r6_sealed_master",
+    "description": "R6 sealed + master_seal \u2014 restored",
+    "state": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "master_seal"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": []
+    },
+    "expected_actions": [
+      {
+        "item": "hammer",
+        "type": "use"
+      },
+      {
+        "item": "master_seal",
+        "type": "use"
+      },
+      {
+        "room": "R1",
+        "type": "teleport"
+      },
+      {
+        "room": "R3",
+        "type": "teleport"
+      },
+      {
+        "room": "R4",
+        "type": "move"
+      },
+      {
+        "room": "R4",
+        "type": "teleport"
+      },
+      {
+        "room": "R5",
+        "type": "move"
+      },
+      {
+        "type": "look"
+      }
+    ]
+  }
+]

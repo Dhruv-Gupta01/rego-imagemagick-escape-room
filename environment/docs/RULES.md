@@ -31,7 +31,7 @@ Human-readable copy of the complete rulebook.
 | R2–R6 | `glyph_key` in inventory AND `glyph_key_id` equals the computed id |
 | R4–R6 | none |
 | R6–R5 | none |
-| R5→R7 | `lit_torch` AND `glyph_key` (correct id) AND player NOT holding `cursed_idol` (unless eclipse) |
+| R5→R7 | `lit_torch` + `glyph_key` (correct id) + all three colour keys (`key_red`, `key_green`, `key_blue`); not movement-blocked (§7) |
 
 ---
 
@@ -47,7 +47,11 @@ Human-readable copy of the complete rulebook.
 | `oil`         | R4 (pick up)          | Ingredient → `lit_torch` |
 | `lit_torch`   | `combine torch oil`   | Required for Exit |
 | `glyph_key`   | `decode_glyph` in R2  | Required for R2–R6 and Exit |
-| `cursed_idol` | R6 (optional — trap)  | Blocks all doors and exit |
+| `cursed_idol` | R6 (optional — trap)  | Blocks move/teleport/exit in `normal` phase |
+| `master_seal` | R6 (pick up)          | Lifts the `sealed`-phase movement block |
+| `key_red`     | R1 (pick up)          | Colour key — all three needed for Exit/win |
+| `key_green`   | R3 (pick up)          | Colour key — all three needed for Exit/win |
+| `key_blue`    | R4 (pick up)          | Colour key — all three needed for Exit/win |
 
 ---
 
@@ -60,11 +64,17 @@ Human-readable copy of the complete rulebook.
 
 ---
 
-## Cursed Idol Override
+## Movement-Blocking Lattice (epoch phase + master_seal)
 
-- **Base:** holding `cursed_idol` → ALL `move`, `teleport`, and `exit` actions **DENIED**.
-- **Exception:** if `epoch_phase == "eclipse"` → curse is lifted; doors and exit work normally.
-- **Precedence:** `eclipse` exception beats the curse; curse beats normal key possession.
+Applies to `move`, `teleport`, and `exit` only (never to look/take/combine/use/decode_glyph).
+`epoch_phase` ∈ {`normal`, `eclipse`, `sealed`}:
+
+- **`normal`** → blocked iff `cursed_idol` is held.
+- **`eclipse`** → never blocked (the curse is lifted even while holding the idol).
+- **`sealed`** → blocked regardless of the idol, UNLESS `master_seal` is held.
+
+Movement is blocked exactly when `(normal AND cursed_idol)` OR `(sealed AND NOT master_seal)`.
+See instruction §7.
 
 ---
 
@@ -85,3 +95,4 @@ Player wins when **all** of the following hold:
 3. `lit_torch` in inventory
 4. `glyph_key` in inventory
 5. `glyph_key_id` equals `(glyph_width // 8) % 16` for the scenario's `glyph_index`
+6. ALL three colour keys in inventory: `key_red` AND `key_green` AND `key_blue`

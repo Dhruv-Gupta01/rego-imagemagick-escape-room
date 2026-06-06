@@ -34,7 +34,7 @@ Every OPA call receives a JSON object with these fields:
 | `inventory` | array of string | Items the player is holding |
 | `unlocked_rooms` | array of string | Every room legally entered so far |
 | `glyph_key_id` | integer or null | Integer id of the decoded glyph key; null if not yet decoded |
-| `epoch_phase` | string | `"normal"` or `"eclipse"` |
+| `epoch_phase` | string | `"normal"`, `"eclipse"`, or `"sealed"` (see §7) |
 | `glyph_index` | integer | Which glyph to decode (0–3); injected per scenario |
 | `available_items` | array of string | Items in current room not yet picked up |
 | `action` | object | The action being evaluated (omitted for `allowed_actions` queries) |
@@ -71,7 +71,7 @@ Eight rooms. All door edges are **undirected** (traversal works both ways).
 | R2 ↔ R6 | `glyph_key` in inventory **AND** `glyph_key_id` equals the computed id (§5) |
 | R4 ↔ R6 | none |
 | R6 ↔ R5 | none |
-| R5 → R7 | `lit_torch` AND `glyph_key` (correct id) in inventory; not curse-blocked (§7); via `exit` action only — not `move` |
+| R5 → R7 | `lit_torch` + `glyph_key` (correct id) + all three colour keys (§9) in inventory; not movement-blocked (§7); via `exit` action only — not `move` |
 
 ---
 
@@ -88,6 +88,10 @@ Eight rooms. All door edges are **undirected** (traversal works both ways).
 | `lit_torch` | `combine torch oil` | Required for Exit |
 | `glyph_key` | `decode_glyph` in R2 | Required for R2–R6 door and Exit |
 | `cursed_idol` | Pick up in R6 (optional) | **Trap item** — see §7 |
+| `master_seal` | Pick up in R6 | Lifts the `sealed`-phase movement block (see §7) |
+| `key_red` | Pick up in R1 | One of three colour keys required to Exit and win (§9) |
+| `key_green` | Pick up in R3 | One of three colour keys required to Exit and win (§9) |
+| `key_blue` | Pick up in R4 | One of three colour keys required to Exit and win (§9) |
 
 `combine` ingredient order does not matter (`stick rock` = `rock stick`).
 
@@ -103,10 +107,10 @@ The policy must handle exactly these action types:
 | `take` | `item` | `item` is in `available_items` |
 | `combine` | `item1`, `item2` | Both items in inventory; a valid recipe exists |
 | `use` | `item` | `item` is in inventory |
-| `move` | `room` | Door requirement met (§2); not curse-blocked (§7); target ≠ R7 |
+| `move` | `room` | Door requirement met (§2); not movement-blocked (§7); target ≠ R7 |
 | `decode_glyph` | — | `current_room == "R2"` |
-| `teleport` | `room` | In R6; not curse-blocked; target is reachable (§8) |
-| `exit` | — | In R5; `lit_torch` + `glyph_key` (correct id) in inventory; not curse-blocked |
+| `teleport` | `room` | In R6; not movement-blocked (§7); target is reachable (§8) |
+| `exit` | — | In R5; not movement-blocked (§7); `lit_torch` + `glyph_key` (correct id) in inventory; **and all three colour keys** `key_red`, `key_green`, `key_blue` in inventory (§9) |
 
 ---
 
@@ -171,15 +175,30 @@ reach from `current_room` (see §8). Used internally by `allow` and
 
 ---
 
-## §7 — Cursed idol override (precedence chain)
+## §7 — Movement-blocking lattice (epoch phase + master_seal)
 
-- **Base rule:** holding `cursed_idol` in inventory **blocks** all `move`,
-  `teleport`, and `exit` actions regardless of key possession.
-- **Exception:** if `epoch_phase == "eclipse"`, the curse is lifted and those
-  actions are evaluated normally against their door/exit requirements.
-- **Precedence:** eclipse exception beats the curse; the curse beats normal key
-  possession. `look`, `take`, `combine`, `use`, and `decode_glyph` are **not**
-  affected by the curse.
+Whether **`move`, `teleport`, and `exit`** are blocked is decided by `epoch_phase`
+together with two items. (`look`, `take`, `combine`, `use`, and `decode_glyph`
+are **never** blocked by any of this.) `epoch_phase` is one of `"normal"`,
+`"eclipse"`, or `"sealed"`:
+
+- **`normal`** — movement is blocked **iff** `cursed_idol` is in inventory.
+- **`eclipse`** — movement is **never** blocked; the eclipse lifts the
+  `cursed_idol` curse entirely (even while you still hold the idol).
+- **`sealed`** — movement is blocked **regardless of the idol**, **unless**
+  `master_seal` is in inventory, which lifts the sealed block.
+
+Equivalently, **movement is blocked exactly when**:
+
+```
+(epoch_phase == "normal" AND cursed_idol in inventory)
+  OR
+(epoch_phase == "sealed" AND master_seal NOT in inventory)
+```
+
+A blocked `move` / `teleport` / `exit` is denied no matter how well its other
+requirements (doors, keys, reachability) are satisfied. In `"eclipse"`, and in
+`"sealed"` while holding `master_seal`, the idol does **not** block anything.
 
 ---
 
@@ -188,7 +207,7 @@ reach from `current_room` (see §8). Used internally by `allow` and
 The wormhole pad is in R6. `teleport <room>` is allowed when all of:
 
 1. `current_room == "R6"`
-2. Not curse-blocked (§7)
+2. Not movement-blocked (§7)
 3. `room` is in `unlocked_rooms`
 4. `room` is **transitively reachable** from `current_room` through the graph
    formed by: edges between rooms that are both in `unlocked_rooms` AND whose
@@ -210,6 +229,11 @@ requires a key the player does not currently hold).
 3. `"lit_torch"` in `inventory`
 4. `"glyph_key"` in `inventory`
 5. `glyph_key_id == (glyph_width_for_glyph_index // 8) % 16`
+6. **Every** colour key is in `inventory`: `key_red` **AND** `key_green` **AND** `key_blue`.
+
+Requirement 6 is a *universal* condition — it holds only when **none** of the
+three colour keys is missing. The same colour-key requirement also gates the
+`exit` action (§4).
 
 ---
 
