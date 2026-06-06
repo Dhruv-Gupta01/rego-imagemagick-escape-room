@@ -168,7 +168,8 @@ that would make `allow` true must appear; no extra elements.
 ### `reachable_rooms` (partial set)
 `data.escape.reachable_rooms` produces the set of rooms the wormhole pad can
 reach from `current_room` (see §8). Used internally by `allow` and
-`allowed_actions` for teleport decisions.
+`allowed_actions` for teleport decisions. The current room itself is **never** a
+member (you cannot teleport to where you already are).
 
 ### `win` (complete rule)
 `data.escape.win` is `true` when the player has won (§9).
@@ -212,6 +213,9 @@ The wormhole pad is in R6. `teleport <room>` is allowed when all of:
 4. `room` is **transitively reachable** from `current_room` through the graph
    formed by: edges between rooms that are both in `unlocked_rooms` AND whose
    door requirement is currently satisfied (item in inventory / correct id).
+5. `room != current_room` — you never teleport to the room you are already in,
+   so the current room is excluded from `reachable_rooms` and from the teleport
+   actions in `allowed_actions`.
 
 Condition 4 requires a transitive-closure computation over the unlocked,
 passable sub-graph — not just a membership check. A room can be in
