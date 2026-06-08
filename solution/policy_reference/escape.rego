@@ -4,6 +4,9 @@ import future.keywords.contains
 import future.keywords.if
 import future.keywords.in
 
+# Reference oracle for the escape-room policy. Every decision is derived from
+# input.* — no answers are hardcoded. See instruction.md and docs/RULES.md.
+
 # ─── Room graph ────────────────────────────────────────────────────────────────
 # door_req[from][to] = item required to traverse; "" means no item required.
 # The exit door (R5→R7) is handled by the `exit` action rule, not here.
