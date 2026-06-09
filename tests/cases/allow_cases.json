@@ -1,7 +1,7 @@
 [
   {
     "id": "combine_oil_torch_reverse",
-    "description": "combine rev",
+    "description": "combine_oil_torch_reverse",
     "input": {
       "current_room": "R4",
       "inventory": [
@@ -26,7 +26,7 @@
   },
   {
     "id": "combine_rock_stick_reverse",
-    "description": "combine rev",
+    "description": "combine_rock_stick_reverse",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -51,7 +51,7 @@
   },
   {
     "id": "combine_stick_rock",
-    "description": "combine",
+    "description": "combine_stick_rock",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -76,7 +76,7 @@
   },
   {
     "id": "combine_torch_oil",
-    "description": "combine",
+    "description": "combine_torch_oil",
     "input": {
       "current_room": "R4",
       "inventory": [
@@ -101,7 +101,7 @@
   },
   {
     "id": "decode_glyph_in_r2",
-    "description": "decode",
+    "description": "decode_glyph_in_r2",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -125,7 +125,7 @@
   },
   {
     "id": "exit_clean_full_kit_idx0",
-    "description": "exit kit",
+    "description": "exit_clean_full_kit_idx0",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -157,8 +157,43 @@
     "expected": true
   },
   {
+    "id": "exit_cursed_anchor_full_kit",
+    "description": "exit_cursed_anchor_full_kit",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "cursed_idol",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "exit_eclipse_no_ward_idx0",
-    "description": "exit eclipse no ward",
+    "description": "exit_eclipse_no_ward_idx0",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -191,7 +226,7 @@
   },
   {
     "id": "exit_eclipse_with_idol",
-    "description": "exit eclipse+idol",
+    "description": "exit_eclipse_with_idol",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -224,8 +259,42 @@
     "expected": true
   },
   {
+    "id": "exit_sealed_anchor_full_kit",
+    "description": "exit_sealed_anchor_full_kit",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "exit_sealed_with_master_seal",
-    "description": "exit sealed+seal",
+    "description": "exit_sealed_with_master_seal",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -259,7 +328,7 @@
   },
   {
     "id": "look_always_allowed",
-    "description": "look",
+    "description": "look_always_allowed",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -278,8 +347,32 @@
     "expected": true
   },
   {
+    "id": "move_eclipse_ward_anchor",
+    "description": "move_eclipse_ward_anchor",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "eclipse_ward",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "move_eclipse_with_idol",
-    "description": "move eclipse+idol",
+    "description": "move_eclipse_with_idol",
     "input": {
       "current_room": "R0",
       "inventory": [
@@ -301,8 +394,32 @@
     "expected": true
   },
   {
+    "id": "move_normal_cursed_anchor",
+    "description": "move_normal_cursed_anchor",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "move_r0_to_r1_no_req",
-    "description": "move",
+    "description": "move_r0_to_r1_no_req",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -323,7 +440,7 @@
   },
   {
     "id": "move_r1_to_r2_with_brass_key",
-    "description": "move brass",
+    "description": "move_r1_to_r2_with_brass_key",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -347,7 +464,7 @@
   },
   {
     "id": "move_r2_to_r6_correct_glyph_id",
-    "description": "move R6 id",
+    "description": "move_r2_to_r6_correct_glyph_id",
     "input": {
       "current_room": "R2",
       "inventory": [
@@ -373,7 +490,7 @@
   },
   {
     "id": "move_r3_to_r4_with_hammer",
-    "description": "move hammer",
+    "description": "move_r3_to_r4_with_hammer",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -397,8 +514,31 @@
     "expected": true
   },
   {
+    "id": "move_sealed_anchor",
+    "description": "move_sealed_anchor",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "move_sealed_master_door_item",
-    "description": "move sealed+seal+hammer",
+    "description": "move_sealed_master_door_item",
     "input": {
       "current_room": "R3",
       "inventory": [
@@ -424,7 +564,7 @@
   },
   {
     "id": "move_sealed_with_master_seal",
-    "description": "move sealed+seal",
+    "description": "move_sealed_with_master_seal",
     "input": {
       "current_room": "R0",
       "inventory": [
@@ -447,7 +587,7 @@
   },
   {
     "id": "take_brass_key_r0",
-    "description": "take",
+    "description": "take_brass_key_r0",
     "input": {
       "current_room": "R0",
       "inventory": [],
@@ -470,7 +610,7 @@
   },
   {
     "id": "take_key_red_r1",
-    "description": "take key",
+    "description": "take_key_red_r1",
     "input": {
       "current_room": "R1",
       "inventory": [
@@ -496,7 +636,7 @@
   },
   {
     "id": "take_master_seal_r6",
-    "description": "take seal",
+    "description": "take_master_seal_r6",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -514,7 +654,8 @@
       "available_items": [
         "cursed_idol",
         "master_seal",
-        "eclipse_ward"
+        "eclipse_ward",
+        "phase_anchor"
       ],
       "action": {
         "type": "take",
@@ -525,8 +666,67 @@
     "expected": true
   },
   {
+    "id": "take_phase_anchor_r6",
+    "description": "take_phase_anchor_r6",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [
+        "cursed_idol",
+        "master_seal",
+        "eclipse_ward",
+        "phase_anchor"
+      ],
+      "action": {
+        "type": "take",
+        "item": "phase_anchor"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
+    "id": "teleport_cursed_anchor",
+    "description": "teleport_cursed_anchor",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "cursed_idol",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": true
+  },
+  {
     "id": "teleport_eclipse_no_ward",
-    "description": "teleport eclipse",
+    "description": "teleport_eclipse_no_ward",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -552,7 +752,7 @@
   },
   {
     "id": "teleport_reachable_unlocked",
-    "description": "teleport reach",
+    "description": "teleport_reachable_unlocked",
     "input": {
       "current_room": "R6",
       "inventory": [
@@ -579,7 +779,7 @@
   },
   {
     "id": "use_item_in_inventory",
-    "description": "use",
+    "description": "use_item_in_inventory",
     "input": {
       "current_room": "R0",
       "inventory": [

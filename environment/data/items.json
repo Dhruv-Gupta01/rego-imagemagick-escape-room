@@ -58,6 +58,11 @@
       "obtainable_in": "R6",
       "craftable": false
     },
+    "phase_anchor": {
+      "description": "A stabiliser. Holding phase_anchor lifts ALL movement blocking in every phase (overrides cursed_idol, eclipse_ward, and the sealed phase) — the highest-priority rule.",
+      "obtainable_in": "R6",
+      "craftable": false
+    },
     "key_red": {
       "description": "Red colour key. One of three colour keys; ALL three (key_red, key_green, key_blue) are required to use the exit and to win.",
       "obtainable_in": "R1",

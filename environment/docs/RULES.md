@@ -50,6 +50,7 @@ Human-readable copy of the complete rulebook.
 | `cursed_idol` | R6 (optional — trap)  | Blocks move/teleport/exit in `normal` phase |
 | `master_seal` | R6 (pick up)          | Lifts the `sealed`-phase movement block |
 | `eclipse_ward` | R6 (pick up — trap)  | Re-imposes the movement block during `eclipse` |
+| `phase_anchor` | R6 (pick up)          | Lifts ALL movement blocking in every phase (highest priority) |
 | `key_red`     | R1 (pick up)          | Colour key — all three needed for Exit/win |
 | `key_green`   | R3 (pick up)          | Colour key — all three needed for Exit/win |
 | `key_blue`    | R4 (pick up)          | Colour key — all three needed for Exit/win |
@@ -74,8 +75,11 @@ Applies to `move`, `teleport`, and `exit` only (never to look/take/combine/use/d
 - **`eclipse`** → curse lifted, so normally not blocked; but blocked iff `eclipse_ward` is held.
 - **`sealed`** → blocked regardless of the idol, UNLESS `master_seal` is held.
 
-Movement is blocked exactly when `(normal AND cursed_idol)` OR `(eclipse AND eclipse_ward)`
-OR `(sealed AND NOT master_seal)`. See instruction §7.
+**Global override:** holding `phase_anchor` lifts ALL movement blocking in every phase.
+
+Movement is blocked exactly when `phase_blocked AND NOT phase_anchor`, where
+`phase_blocked == (normal AND cursed_idol) OR (eclipse AND eclipse_ward) OR (sealed AND NOT master_seal)`.
+See instruction §7.
 
 ---
 

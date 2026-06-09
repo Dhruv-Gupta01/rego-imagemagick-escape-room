@@ -20,6 +20,10 @@
     {
       "id": "correct_glyph_key_id",
       "description": "glyph_key_id in game state must equal (glyph_width // 8) % 16 for the scenario's glyph_index. A glyph_key with a wrong id does not satisfy the win condition."
+    },
+    {
+      "id": "all_colour_keys",
+      "description": "ALL three colour keys must be in inventory: key_red AND key_green AND key_blue (see instruction §9)."
     }
   ],
   "note": "The exit action (R5->R7) also enforces these conditions before granting entry to R7. Winning by entering R7 through any other means is not possible — R7 has no other door."

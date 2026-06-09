@@ -90,6 +90,7 @@ Eight rooms. All door edges are **undirected** (traversal works both ways).
 | `cursed_idol` | Pick up in R6 (optional) | **Trap item** — see §7 |
 | `master_seal` | Pick up in R6 | Lifts the `sealed`-phase movement block (see §7) |
 | `eclipse_ward` | Pick up in R6 | **Trap item** — re-imposes the movement block during the `eclipse` phase (see §7) |
+| `phase_anchor` | Pick up in R6 | Lifts **all** movement blocking in every phase — highest priority (see §7) |
 | `key_red` | Pick up in R1 | One of three colour keys required to Exit and win (§9) |
 | `key_green` | Pick up in R3 | One of three colour keys required to Exit and win (§9) |
 | `key_blue` | Pick up in R4 | One of three colour keys required to Exit and win (§9) |
@@ -192,14 +193,22 @@ are **never** blocked by any of this.) `epoch_phase` is one of `"normal"`,
 - **`sealed`** — movement is blocked **regardless of the idol**, **unless**
   `master_seal` is in inventory, which lifts the sealed block.
 
-Equivalently, **movement is blocked exactly when**:
+**Global override:** holding **`phase_anchor`** lifts **all** movement blocking
+in **every** phase, regardless of `cursed_idol` / `eclipse_ward` / `master_seal`.
+It is the highest-priority rule.
+
+Equivalently, **movement is blocked exactly when** the phase condition holds
+**and** `phase_anchor` is **not** held:
 
 ```
-(epoch_phase == "normal" AND cursed_idol in inventory)
-  OR
-(epoch_phase == "eclipse" AND eclipse_ward in inventory)
-  OR
-(epoch_phase == "sealed" AND master_seal NOT in inventory)
+movement_blocked  ==  phase_blocked  AND  (phase_anchor NOT in inventory)
+
+phase_blocked ==
+    (epoch_phase == "normal" AND cursed_idol in inventory)
+      OR
+    (epoch_phase == "eclipse" AND eclipse_ward in inventory)
+      OR
+    (epoch_phase == "sealed" AND master_seal NOT in inventory)
 ```
 
 A blocked `move` / `teleport` / `exit` is denied no matter how well its other

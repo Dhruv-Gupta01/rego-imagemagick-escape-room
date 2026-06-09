@@ -46,23 +46,35 @@ computed_glyph_key_id := (glyph_widths[input.glyph_index] / 8) % 16
 #   normal phase  : blocked iff cursed_idol is held
 #   eclipse phase : never blocked (the idol curse is lifted)
 #   sealed phase  : blocked, UNLESS master_seal is held (master_seal overrides)
-movement_blocked if {
+# phase_blocked: the per-phase block, before the global phase_anchor override.
+phase_blocked if {
 	input.epoch_phase == "normal"
 	"cursed_idol" in input.inventory
 }
 
-movement_blocked if {
+phase_blocked if {
 	input.epoch_phase == "eclipse"
 	"eclipse_ward" in input.inventory
 }
 
-movement_blocked if {
+phase_blocked if {
 	input.epoch_phase == "sealed"
 	not has_master_seal
 }
 
+# movement_blocked: the per-phase block applies UNLESS phase_anchor overrides it.
+# Holding phase_anchor lifts ALL movement blocking in every phase.
+movement_blocked if {
+	phase_blocked
+	not has_phase_anchor
+}
+
 has_master_seal if {
 	"master_seal" in input.inventory
+}
+
+has_phase_anchor if {
+	"phase_anchor" in input.inventory
 }
 
 # ─── Colour-lock universal requirement ────────────────────────────────────────

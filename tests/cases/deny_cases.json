@@ -45,6 +45,40 @@
     "expected": false
   },
   {
+    "id": "exit_anchor_unblocks_but_missing_key",
+    "description": "exit_anchor_unblocks_but_missing_key",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "cursed_idol",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "exit_cursed_normal_blocked",
     "description": "exit_cursed_normal_blocked",
     "input": {
@@ -565,6 +599,42 @@
     "expected": false
   },
   {
+    "id": "move_r7_denied_even_anchor",
+    "description": "move_r7_denied_even_anchor",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "phase_anchor"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R7"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "move_sealed_door_item_no_seal",
     "description": "move_sealed_door_item_no_seal",
     "input": {
@@ -774,6 +844,33 @@
       "current_room": "R6",
       "inventory": [
         "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R6"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "teleport_self_excluded_even_anchor",
+    "description": "teleport_self_excluded_even_anchor",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer",
+        "phase_anchor"
       ],
       "unlocked_rooms": [
         "R1",
