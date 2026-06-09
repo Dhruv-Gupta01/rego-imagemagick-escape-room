@@ -1,5 +1,384 @@
 [
   {
+    "id": "combine_invalid_recipe",
+    "description": "combine_invalid_recipe",
+    "input": {
+      "current_room": "R3",
+      "inventory": [
+        "brass_key",
+        "rock"
+      ],
+      "unlocked_rooms": [
+        "R3"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "combine",
+        "item1": "brass_key",
+        "item2": "rock"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "decode_glyph_not_in_r2",
+    "description": "decode_glyph_not_in_r2",
+    "input": {
+      "current_room": "R0",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "decode_glyph"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_cursed_normal_blocked",
+    "description": "exit_cursed_normal_blocked",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_eclipse_ward_blocked",
+    "description": "exit_eclipse_ward_blocked",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue",
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_missing_all_color_keys",
+    "description": "exit_missing_all_color_keys",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_missing_one_color_key",
+    "description": "exit_missing_one_color_key",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_no_glyph_key",
+    "description": "exit_no_glyph_key",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_no_lit_torch",
+    "description": "exit_no_lit_torch",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_sealed_no_master_seal",
+    "description": "exit_sealed_no_master_seal",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_wrong_glyph_id",
+    "description": "exit_wrong_glyph_id",
+    "input": {
+      "current_room": "R5",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 1,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "exit_wrong_room",
+    "description": "exit_wrong_room",
+    "input": {
+      "current_room": "R1",
+      "inventory": [
+        "hammer",
+        "lit_torch",
+        "glyph_key",
+        "key_red",
+        "key_green",
+        "key_blue"
+      ],
+      "unlocked_rooms": [
+        "R0",
+        "R1"
+      ],
+      "glyph_key_id": 14,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "exit"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "move_cursed_no_eclipse",
+    "description": "move_cursed_no_eclipse",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "cursed_idol"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "move_eclipse_ward_blocked",
+    "description": "move_eclipse_ward_blocked",
+    "input": {
+      "current_room": "R0",
+      "inventory": [
+        "eclipse_ward"
+      ],
+      "unlocked_rooms": [
+        "R0"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "eclipse",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "move",
+        "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "move_r2_no_brass_key",
     "description": "move_r2_no_brass_key",
     "input": {
@@ -73,32 +452,6 @@
     "expected": false
   },
   {
-    "id": "move_r6_wrong_glyph_id_index0",
-    "description": "move_r6_wrong_glyph_id_index0",
-    "input": {
-      "current_room": "R2",
-      "inventory": [
-        "brass_key",
-        "glyph_key"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2"
-      ],
-      "glyph_key_id": 99,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "move",
-        "room": "R6"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
     "id": "move_r6_hardcoded_14_fails_index2",
     "description": "move_r6_hardcoded_14_fails_index2",
     "input": {
@@ -151,229 +504,34 @@
     "expected": false
   },
   {
-    "id": "exit_wrong_glyph_id",
-    "description": "exit_wrong_glyph_id",
+    "id": "move_r6_wrong_glyph_id_index0",
+    "description": "move_r6_wrong_glyph_id_index0",
     "input": {
-      "current_room": "R5",
+      "current_room": "R2",
       "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 1,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_no_lit_torch",
-    "description": "exit_no_lit_torch",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_no_glyph_key",
-    "description": "exit_no_glyph_key",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "key_red",
-        "key_green",
-        "key_blue"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_wrong_room",
-    "description": "exit_wrong_room",
-    "input": {
-      "current_room": "R1",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_missing_one_color_key",
-    "description": "exit_missing_one_color_key",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_missing_all_color_keys",
-    "description": "exit_missing_all_color_keys",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
+        "brass_key",
         "glyph_key"
       ],
       "unlocked_rooms": [
         "R0",
         "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
+        "R2"
       ],
-      "glyph_key_id": 14,
+      "glyph_key_id": 99,
       "epoch_phase": "normal",
       "glyph_index": 0,
       "available_items": [],
       "action": {
-        "type": "exit"
+        "type": "move",
+        "room": "R6"
       }
     },
     "query": "data.escape.allow",
     "expected": false
   },
   {
-    "id": "exit_cursed_normal_blocked",
-    "description": "exit_cursed_normal_blocked",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue",
-        "cursed_idol"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_sealed_no_master_seal",
-    "description": "exit_sealed_no_master_seal",
+    "id": "move_r7_denied",
+    "description": "move_r7_denied",
     "input": {
       "current_room": "R5",
       "inventory": [
@@ -391,92 +549,16 @@
         "R3",
         "R4",
         "R5",
-        "R6"
+        "R6",
+        "R7"
       ],
       "glyph_key_id": 14,
-      "epoch_phase": "sealed",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "exit_eclipse_ward_blocked",
-    "description": "exit_eclipse_ward_blocked",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue",
-        "eclipse_ward"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "eclipse",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "exit"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "move_cursed_no_eclipse",
-    "description": "move_cursed_no_eclipse",
-    "input": {
-      "current_room": "R0",
-      "inventory": [
-        "cursed_idol"
-      ],
-      "unlocked_rooms": [
-        "R0"
-      ],
-      "glyph_key_id": null,
       "epoch_phase": "normal",
       "glyph_index": 0,
       "available_items": [],
       "action": {
         "type": "move",
-        "room": "R1"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "move_sealed_no_master_seal",
-    "description": "move_sealed_no_master_seal",
-    "input": {
-      "current_room": "R0",
-      "inventory": [],
-      "unlocked_rooms": [
-        "R0"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "sealed",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "move",
-        "room": "R1"
+        "room": "R7"
       }
     },
     "query": "data.escape.allow",
@@ -508,23 +590,45 @@
     "expected": false
   },
   {
-    "id": "move_eclipse_ward_blocked",
-    "description": "move_eclipse_ward_blocked",
+    "id": "move_sealed_no_master_seal",
+    "description": "move_sealed_no_master_seal",
     "input": {
       "current_room": "R0",
-      "inventory": [
-        "eclipse_ward"
-      ],
+      "inventory": [],
       "unlocked_rooms": [
         "R0"
       ],
       "glyph_key_id": null,
-      "epoch_phase": "eclipse",
+      "epoch_phase": "sealed",
       "glyph_index": 0,
       "available_items": [],
       "action": {
         "type": "move",
         "room": "R1"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "take_item_not_in_room",
+    "description": "take_item_not_in_room",
+    "input": {
+      "current_room": "R1",
+      "inventory": [],
+      "unlocked_rooms": [
+        "R0",
+        "R1"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [
+        "stick"
+      ],
+      "action": {
+        "type": "take",
+        "item": "rock"
       }
     },
     "query": "data.escape.allow",
@@ -558,32 +662,6 @@
     "expected": false
   },
   {
-    "id": "teleport_sealed_no_master_seal",
-    "description": "teleport_sealed_no_master_seal",
-    "input": {
-      "current_room": "R6",
-      "inventory": [
-        "hammer"
-      ],
-      "unlocked_rooms": [
-        "R1",
-        "R3",
-        "R4",
-        "R6"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "sealed",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "teleport",
-        "room": "R4"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
     "id": "teleport_eclipse_ward_blocked",
     "description": "teleport_eclipse_ward_blocked",
     "input": {
@@ -605,32 +683,6 @@
       "action": {
         "type": "teleport",
         "room": "R4"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "teleport_self_excluded",
-    "description": "teleport_self_excluded",
-    "input": {
-      "current_room": "R6",
-      "inventory": [
-        "hammer"
-      ],
-      "unlocked_rooms": [
-        "R1",
-        "R3",
-        "R4",
-        "R6"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "teleport",
-        "room": "R6"
       }
     },
     "query": "data.escape.allow",
@@ -690,6 +742,58 @@
     "expected": false
   },
   {
+    "id": "teleport_sealed_no_master_seal",
+    "description": "teleport_sealed_no_master_seal",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "sealed",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R4"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
+    "id": "teleport_self_excluded",
+    "description": "teleport_self_excluded",
+    "input": {
+      "current_room": "R6",
+      "inventory": [
+        "hammer"
+      ],
+      "unlocked_rooms": [
+        "R1",
+        "R3",
+        "R4",
+        "R6"
+      ],
+      "glyph_key_id": null,
+      "epoch_phase": "normal",
+      "glyph_index": 0,
+      "available_items": [],
+      "action": {
+        "type": "teleport",
+        "room": "R6"
+      }
+    },
+    "query": "data.escape.allow",
+    "expected": false
+  },
+  {
     "id": "teleport_unreachable_isolated",
     "description": "teleport_unreachable_isolated",
     "input": {
@@ -710,110 +814,6 @@
       "action": {
         "type": "teleport",
         "room": "R2"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "decode_glyph_not_in_r2",
-    "description": "decode_glyph_not_in_r2",
-    "input": {
-      "current_room": "R0",
-      "inventory": [],
-      "unlocked_rooms": [
-        "R0"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "decode_glyph"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "take_item_not_in_room",
-    "description": "take_item_not_in_room",
-    "input": {
-      "current_room": "R1",
-      "inventory": [],
-      "unlocked_rooms": [
-        "R0",
-        "R1"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [
-        "stick"
-      ],
-      "action": {
-        "type": "take",
-        "item": "rock"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "combine_invalid_recipe",
-    "description": "combine_invalid_recipe",
-    "input": {
-      "current_room": "R3",
-      "inventory": [
-        "brass_key",
-        "rock"
-      ],
-      "unlocked_rooms": [
-        "R3"
-      ],
-      "glyph_key_id": null,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "combine",
-        "item1": "brass_key",
-        "item2": "rock"
-      }
-    },
-    "query": "data.escape.allow",
-    "expected": false
-  },
-  {
-    "id": "move_r7_denied",
-    "description": "move_r7_denied",
-    "input": {
-      "current_room": "R5",
-      "inventory": [
-        "hammer",
-        "lit_torch",
-        "glyph_key",
-        "key_red",
-        "key_green",
-        "key_blue"
-      ],
-      "unlocked_rooms": [
-        "R0",
-        "R1",
-        "R2",
-        "R3",
-        "R4",
-        "R5",
-        "R6",
-        "R7"
-      ],
-      "glyph_key_id": 14,
-      "epoch_phase": "normal",
-      "glyph_index": 0,
-      "available_items": [],
-      "action": {
-        "type": "move",
-        "room": "R7"
       }
     },
     "query": "data.escape.allow",

@@ -22,13 +22,13 @@ door_req := {
 }
 
 # ─── Combine recipes ───────────────────────────────────────────────────────────
-combine_result["stick"]["rock"] := "hammer"
-
-combine_result["rock"]["stick"] := "hammer"
-
 combine_result["torch"]["oil"] := "lit_torch"
 
 combine_result["oil"]["torch"] := "lit_torch"
+
+combine_result["stick"]["rock"] := "hammer"
+
+combine_result["rock"]["stick"] := "hammer"
 
 # ─── Glyph decode ─────────────────────────────────────────────────────────────
 # Pixel widths of glyph_0..glyph_3 (deterministic; baked in at docker build time).
